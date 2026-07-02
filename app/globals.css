@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "leaflet/dist/leaflet.css";
+
+html, body { height: 100%; }
+body { @apply bg-slate-50 text-slate-900 antialiased; }
+
+.leaflet-container { background: #eaf3fb; }
+.marker-pin {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 26px; height: 26px; padding: 0 6px;
+  border-radius: 999px; font-size: 12px; font-weight: 700; color: white;
+  border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,.25);
+}
+.marker-pin.pl { background: #dc2626; }
+.marker-pin.eu { background: #2563eb; }
+.marker-pin.world { background: #059669; }

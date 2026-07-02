@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: grant
+      POSTGRES_PASSWORD: grant
+      POSTGRES_DB: grant
+    ports:
+      - "5432:5432"
+    volumes:
+      - grant-db-data:/var/lib/postgresql/data
+
+volumes:
+  grant-db-data:
