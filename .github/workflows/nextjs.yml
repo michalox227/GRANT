@@ -1,0 +1,37 @@
+# Deploy statycznej wersji Grant Atlas (static-demo/) na GitHub Pages.
+# Pełna aplikacja Next.js + Postgres (reszta repo) nie nadaje się na Pages —
+# wymaga serwera; do hostowania np. Vercel + Neon.
+name: Deploy Grant Atlas demo to Pages
+
+on:
+  push:
+    branches: ["claude/grants-funding-tool-2w3dyk", "main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload static demo
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: static-demo
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

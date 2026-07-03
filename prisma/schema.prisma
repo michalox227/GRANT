@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Region: gruby podział geograficzny dla filtra
+enum Region {
+  PL
+  EU
+  WORLD
+}
+
+// Status terminu: CONFIRMED = potwierdzony ze źródła; INDICATIVE = harmonogram planowany (do potwierdzenia); ROLLING = ciągły nabór
+enum DeadlineStatus {
+  CONFIRMED
+  INDICATIVE
+  ROLLING
+}
+
+model Program {
+  id                String          @id @default(cuid())
+  name              String
+  shortName         String?
+  organizer         String
+  country           String          // np. "Polska", "Niemcy", "USA"
+  countryCode       String          // ISO-2, np. "PL"
+  region            Region
+  latitude          Float
+  longitude         Float
+  applyOpen         DateTime?
+  applyDeadline     DateTime?
+  deadlineStatus    DeadlineStatus  @default(CONFIRMED)
+  amount            String          // np. "do 600 000 PLN"
+  currency          String?         // "PLN", "EUR", "USD"...
+  fundingType       String          // "grant bezzwrotny", "stypendium", "matching grant"...
+  forWhom           String          // grupa docelowa
+  requirements      String          // wymogi - swobodny tekst
+  description       String          // krótki opis
+  details           String          // dokładne informacje
+  officialUrl       String
+  tags              String[]        // ["deeptech","B+R","AI","biotech"...]
+  verifiedAt        DateTime        @default(now())
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([region])
+  @@index([countryCode])
+  @@index([applyDeadline])
+}
+
+model Aggregator {
+  id          String   @id @default(cuid())
+  name        String
+  url         String
+  country     String   // "Polska", "UE", "Świat"
+  region      Region
+  description String
+  createdAt   DateTime @default(now())
+}

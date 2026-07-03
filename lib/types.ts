@@ -1,0 +1,24 @@
+export type ProgramDTO = {
+  id: string;
+  name: string;
+  shortName: string | null;
+  organizer: string;
+  country: string;
+  countryCode: string;
+  region: "PL" | "EU" | "WORLD";
+  latitude: number;
+  longitude: number;
+  applyOpen: string | null;
+  applyDeadline: string | null;
+  deadlineStatus: "CONFIRMED" | "INDICATIVE" | "ROLLING";
+  amount: string;
+  currency: string | null;
+  fundingType: string;
+  forWhom: string;
+  requirements: string;
+  description: string;
+  details: string;
+  officialUrl: string;
+  tags: string[];
+  verifiedAt: string;
+};
