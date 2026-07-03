@@ -5,7 +5,23 @@ export const dynamic = "force-dynamic";
 const REGION_LABEL = { PL: "Polska", EU: "Europa/UE", WORLD: "Świat" } as const;
 
 export default async function AggregatorsPage() {
-  const aggs = await prisma.aggregator.findMany({ orderBy: [{ region: "asc" }, { name: "asc" }] });
+  let aggs;
+  try {
+    aggs = await prisma.aggregator.findMany({ orderBy: [{ region: "asc" }, { name: "asc" }] });
+    if (aggs.length === 0) throw new Error("empty");
+  } catch {
+    const fallback = (await import("@/lib/fallback-aggregators.json")).default as string[][];
+    const regionOf = (g: string) => (g === "PL" ? "PL" : g === "EU" || g === "EUR_COUNTRY" ? "EU" : "WORLD");
+    aggs = fallback.map((a, i) => ({
+      id: "a" + i,
+      name: a[0],
+      url: a[1],
+      country: a[2],
+      region: regionOf(a[3]) as "PL" | "EU" | "WORLD",
+      description: a[5],
+      createdAt: new Date(),
+    }));
+  }
   const grouped: Record<"PL" | "EU" | "WORLD", typeof aggs> = { PL: [], EU: [], WORLD: [] };
   for (const a of aggs) grouped[a.region].push(a);
 

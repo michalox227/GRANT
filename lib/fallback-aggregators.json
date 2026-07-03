@@ -1,0 +1,994 @@
+[
+ [
+  "granty.pl",
+  "https://granty.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Największy polski agregator konkursów grantowych i dotacji."
+ ],
+ [
+  "Atlas Dotacji",
+  "https://atlasdotacji.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Katalog dotacji dla firm i startupów w PL."
+ ],
+ [
+  "Dotacjomat",
+  "https://dotacjomat.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Wyszukiwarka dotacji dla polskich firm."
+ ],
+ [
+  "Grantbot",
+  "https://grantbot.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Blog + wyszukiwarka dotacji PARP/NCBR/RPO."
+ ],
+ [
+  "DotacjaPro",
+  "https://dotacjapro.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Filtrowanie naborów pod profil firmy — konkursy PARP, NCBR i regionalne."
+ ],
+ [
+  "Grantowo",
+  "https://grantowo.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Przegląd programów wsparcia dla przedsiębiorców i MŚP."
+ ],
+ [
+  "Fundusze Europejskie (gov.pl)",
+  "https://www.funduszeeuropejskie.gov.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Oficjalny portal Funduszy Europejskich w PL — wszystkie programy 2021-2027."
+ ],
+ [
+  "PARP — harmonogram naborów",
+  "https://www.parp.gov.pl/harmonogram-naborow",
+  "Polska",
+  "PL",
+  "",
+  "Oficjalny harmonogram naborów PARP (FENG, FEPW)."
+ ],
+ [
+  "NCBR — harmonogram konkursów",
+  "https://www.gov.pl/web/ncbr/harmonogram-konkursow-2026",
+  "Polska",
+  "PL",
+  "",
+  "Oficjalny harmonogram konkursów NCBR."
+ ],
+ [
+  "FENG (feng.parp.gov.pl)",
+  "https://feng.parp.gov.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Fundusze Europejskie dla Nowoczesnej Gospodarki — nabory PARP."
+ ],
+ [
+  "FEPW (fepw.gov.pl)",
+  "https://www.fepw.gov.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Fundusze Europejskie dla Polski Wschodniej — dedykowane makroregion."
+ ],
+ [
+  "Startup Poland",
+  "https://startuppoland.org/",
+  "Polska",
+  "PL",
+  "",
+  "Największy think tank startupowy w Polsce."
+ ],
+ [
+  "FundEU",
+  "https://fundeu.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Baza dotacji UE dla polskich beneficjentów."
+ ],
+ [
+  "portal-inwestora.pl",
+  "https://portal-inwestora.pl/",
+  "Polska",
+  "PL",
+  "",
+  "Katalog dotacji + kalkulator kwalifikowalności."
+ ],
+ [
+  "EU Funding & Tenders Portal",
+  "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+  "UE",
+  "EU",
+  "",
+  "Główny portal konkursów Komisji Europejskiej (Horizon, EIC, DIGITAL, LIFE, Erasmus+ itd.)."
+ ],
+ [
+  "EIC Community",
+  "https://eic.ec.europa.eu/",
+  "UE",
+  "EU",
+  "",
+  "Oficjalna strona European Innovation Council (Accelerator, Pathfinder, Transition)."
+ ],
+ [
+  "EIC Data Hub",
+  "https://eic.ec.europa.eu/eic-community/eic-data-hub_en",
+  "UE",
+  "EU",
+  "",
+  "Baza wszystkich beneficjentów EIC — Accelerator, Pathfinder, Transition."
+ ],
+ [
+  "Eureka Network",
+  "https://www.eurekanetwork.org/",
+  "UE",
+  "EU",
+  "",
+  "Międzyrządowa sieć Eureka (Eurostars, Clusters, GlobalStars)."
+ ],
+ [
+  "EIT Community",
+  "https://eit.europa.eu/",
+  "UE",
+  "EU",
+  "",
+  "European Institute of Innovation & Technology — 9 KIC (Digital, Health, Climate…)."
+ ],
+ [
+  "Enterprise Europe Network",
+  "https://een.ec.europa.eu/",
+  "UE",
+  "EU",
+  "",
+  "Sieć doradców EEN — wsparcie w aplikacji o granty UE, matchmaking."
+ ],
+ [
+  "Access2Finance EU",
+  "https://access2finance.eu/",
+  "UE",
+  "EU",
+  "",
+  "Baza instrumentów finansowych UE dla MŚP."
+ ],
+ [
+  "EU Funding Portal (indep.)",
+  "https://eufundingportal.eu/",
+  "UE",
+  "EU",
+  "",
+  "Niezależny agregator open calls: Horizon, DIGITAL, Eureka, LIFE, EIT, Erasmus+."
+ ],
+ [
+  "EUACC",
+  "https://www.euacc.ai/",
+  "UE",
+  "EU",
+  "",
+  "Directory startupów + EU grants + VC funding."
+ ],
+ [
+  "28DIGITAL",
+  "https://28digital.eu/",
+  "UE",
+  "EU",
+  "",
+  "Wyszukiwarka open calls dla startupów w UE."
+ ],
+ [
+  "GrantsFinder",
+  "https://www.grantsfinder.eu/",
+  "UE",
+  "EU",
+  "",
+  "Country-by-country guide EU grants for startups."
+ ],
+ [
+  "Evalyze.ai",
+  "https://www.evalyze.ai/",
+  "UE",
+  "EU",
+  "",
+  "Blog + baza grantów dla startupów w Europie."
+ ],
+ [
+  "EXIST",
+  "https://www.exist.de/",
+  "Niemcy",
+  "EUR_COUNTRY",
+  "Niemcy",
+  "Oficjalna strona programu EXIST + niemieckie ekosystemy startupowe."
+ ],
+ [
+  "Förderdatenbank Bund",
+  "https://www.foerderdatenbank.de/",
+  "Niemcy",
+  "EUR_COUNTRY",
+  "Niemcy",
+  "Federalna baza wszystkich programów wsparcia w Niemczech."
+ ],
+ [
+  "High-Tech Gründerfonds",
+  "https://www.htgf.de/",
+  "Niemcy",
+  "EUR_COUNTRY",
+  "Niemcy",
+  "Główny publiczny fundusz seed w Niemczech."
+ ],
+ [
+  "gruenderplattform.de",
+  "https://www.gruenderplattform.de/",
+  "Niemcy",
+  "EUR_COUNTRY",
+  "Niemcy",
+  "Rządowa platforma dla founderów — narzędzia + katalog wsparcia."
+ ],
+ [
+  "Bpifrance",
+  "https://www.bpifrance.fr/",
+  "Francja",
+  "EUR_COUNTRY",
+  "Francja",
+  "Bank publiczny Francji — wszystkie programy dla startupów/MŚP."
+ ],
+ [
+  "aides-entreprises.fr",
+  "https://www.aides-entreprises.fr/",
+  "Francja",
+  "EUR_COUNTRY",
+  "Francja",
+  "Krajowa baza wszystkich aides publicznych dla firm."
+ ],
+ [
+  "les-aides.fr",
+  "https://les-aides.fr/",
+  "Francja",
+  "EUR_COUNTRY",
+  "Francja",
+  "Chambres de Commerce — baza wsparcia dla przedsiębiorstw."
+ ],
+ [
+  "CDTI Innovación",
+  "https://www.cdti.es/",
+  "Hiszpania",
+  "EUR_COUNTRY",
+  "Hiszpania",
+  "Państwowa Agencja Innowacji Hiszpanii — NEOTEC, PID, CIEN i in."
+ ],
+ [
+  "ENISA",
+  "https://www.enisa.es/",
+  "Hiszpania",
+  "EUR_COUNTRY",
+  "Hiszpania",
+  "Publiczna instytucja finansowania startupów."
+ ],
+ [
+  "EOI (Escuela de Organización Industrial)",
+  "https://www.eoi.es/",
+  "Hiszpania",
+  "EUR_COUNTRY",
+  "Hiszpania",
+  "Programy startupowe i wsparcia MŚP."
+ ],
+ [
+  "Invitalia",
+  "https://www.invitalia.it/",
+  "Włochy",
+  "EUR_COUNTRY",
+  "Włochy",
+  "Agencja rządowa — Smart&Start, Nuove Imprese, Contratto di Sviluppo."
+ ],
+ [
+  "CDP Venture Capital",
+  "https://www.cdpventurecapital.it/",
+  "Włochy",
+  "EUR_COUNTRY",
+  "Włochy",
+  "Krajowy fundusz innowacji Włoch."
+ ],
+ [
+  "Ministero Imprese (MIMIT)",
+  "https://www.mimit.gov.it/",
+  "Włochy",
+  "EUR_COUNTRY",
+  "Włochy",
+  "Ministerstwo Przedsiębiorstw i Made in Italy — programy wsparcia."
+ ],
+ [
+  "RVO",
+  "https://www.rvo.nl/",
+  "Holandia",
+  "EUR_COUNTRY",
+  "Holandia",
+  "Netherlands Enterprise Agency — WBSO, MIT, EIA i inne subsydia."
+ ],
+ [
+  "Techleap",
+  "https://www.techleap.nl/",
+  "Holandia",
+  "EUR_COUNTRY",
+  "Holandia",
+  "Holenderska organizacja wspierająca ekosystem tech."
+ ],
+ [
+  "VLAIO (Flandria)",
+  "https://www.vlaio.be/",
+  "Belgia",
+  "EUR_COUNTRY",
+  "Belgia",
+  "Flemish Agency for Innovation & Entrepreneurship — Baekeland, PIO, KMO-Portefeuille."
+ ],
+ [
+  "hub.brussels",
+  "https://hub.brussels/",
+  "Belgia",
+  "EUR_COUNTRY",
+  "Belgia",
+  "Agencja wsparcia biznesu w Regionie Brukselskim."
+ ],
+ [
+  "SOWACCESS (Walonia)",
+  "https://www.sowaccess.be/",
+  "Belgia",
+  "EUR_COUNTRY",
+  "Belgia",
+  "Walońska agencja transferu i finansowania."
+ ],
+ [
+  "Enterprise Ireland",
+  "https://www.enterprise-ireland.com/",
+  "Irlandia",
+  "EUR_COUNTRY",
+  "Irlandia",
+  "Państwowa agencja rozwoju przedsiębiorstw Irlandii."
+ ],
+ [
+  "Local Enterprise Office",
+  "https://www.localenterprise.ie/",
+  "Irlandia",
+  "EUR_COUNTRY",
+  "Irlandia",
+  "Sieć 31 lokalnych biur — Priming Grants, Business Expansion Grants."
+ ],
+ [
+  "Vinnova",
+  "https://www.vinnova.se/en/",
+  "Szwecja",
+  "EUR_COUNTRY",
+  "Szwecja",
+  "Sztucznajenza szwedzka agencja innowacji."
+ ],
+ [
+  "verksamt.se",
+  "https://www.verksamt.se/en/",
+  "Szwecja",
+  "EUR_COUNTRY",
+  "Szwecja",
+  "Państwowy portal dla przedsiębiorstw — dotacje i wsparcie."
+ ],
+ [
+  "Tillväxtverket",
+  "https://tillvaxtverket.se/",
+  "Szwecja",
+  "EUR_COUNTRY",
+  "Szwecja",
+  "Szwedzka agencja rozwoju regionalnego."
+ ],
+ [
+  "Innovation Fund Denmark",
+  "https://innovationsfonden.dk/en",
+  "Dania",
+  "EUR_COUNTRY",
+  "Dania",
+  "Duński państwowy fundusz innowacji — Innobooster, Grand Solutions."
+ ],
+ [
+  "Erhvervsstyrelsen",
+  "https://erhvervsstyrelsen.dk/",
+  "Dania",
+  "EUR_COUNTRY",
+  "Dania",
+  "Duńska Agencja Biznesu — regulacje + wsparcie."
+ ],
+ [
+  "Business Finland",
+  "https://www.businessfinland.fi/",
+  "Finlandia",
+  "EUR_COUNTRY",
+  "Finlandia",
+  "Fińska agencja handlu i innowacji — Tempo, Young Innovative Companies, R2B."
+ ],
+ [
+  "Innovation Norway",
+  "https://www.innovasjonnorge.no/en/",
+  "Norwegia",
+  "EUR_COUNTRY",
+  "Norwegia",
+  "Norweski publiczny finansista innowacji i eksportu."
+ ],
+ [
+  "Norges forskningsråd",
+  "https://www.forskningsradet.no/en/",
+  "Norwegia",
+  "EUR_COUNTRY",
+  "Norwegia",
+  "Rada Badań Norwegii — fundusze R&D."
+ ],
+ [
+  "EAS (Enterprise Estonia)",
+  "https://eas.ee/en/",
+  "Estonia",
+  "EUR_COUNTRY",
+  "Estonia",
+  "Estońska agencja rozwoju biznesu."
+ ],
+ [
+  "KredEx",
+  "https://kredex.ee/en",
+  "Estonia",
+  "EUR_COUNTRY",
+  "Estonia",
+  "Estońska instytucja finansowania biznesu."
+ ],
+ [
+  "MITA / Innovation Agency LT",
+  "https://inovacijuagentura.lt/",
+  "Litwa",
+  "EUR_COUNTRY",
+  "Litwa",
+  "Litewska agencja innowacji."
+ ],
+ [
+  "Versli Lietuva",
+  "https://www.verslilietuva.lt/en/",
+  "Litwa",
+  "EUR_COUNTRY",
+  "Litwa",
+  "Enterprise Lithuania — wsparcie eksportowe i startupowe."
+ ],
+ [
+  "LIAA (Investment & Development Agency of Latvia)",
+  "https://www.liaa.gov.lv/en",
+  "Łotwa",
+  "EUR_COUNTRY",
+  "Łotwa",
+  "Państwowa agencja inwestycji i rozwoju Łotwy."
+ ],
+ [
+  "Agentura API",
+  "https://www.agentura-api.org/",
+  "Czechy",
+  "EUR_COUNTRY",
+  "Czechy",
+  "Agencja MPO — programy OP TAK, OPPIK."
+ ],
+ [
+  "CzechInvest",
+  "https://www.czechinvest.org/",
+  "Czechy",
+  "EUR_COUNTRY",
+  "Czechy",
+  "Agencja inwestycji i wsparcia biznesu."
+ ],
+ [
+  "Slovak Business Agency",
+  "https://www.sbagency.sk/en",
+  "Słowacja",
+  "EUR_COUNTRY",
+  "Słowacja",
+  "Słowacka agencja MŚP + programy startupowe."
+ ],
+ [
+  "IAPMEI",
+  "https://www.iapmei.pt/",
+  "Portugalia",
+  "EUR_COUNTRY",
+  "Portugalia",
+  "Portugalska agencja MŚP i innowacji."
+ ],
+ [
+  "Startup Portugal",
+  "https://www.startupportugal.com/",
+  "Portugalia",
+  "EUR_COUNTRY",
+  "Portugalia",
+  "Krajowa strategia startupowa PT."
+ ],
+ [
+  "aws (Austria Wirtschaftsservice)",
+  "https://www.aws.at/",
+  "Austria",
+  "EUR_COUNTRY",
+  "Austria",
+  "Główna publiczna agencja finansowania biznesu w AT."
+ ],
+ [
+  "FFG",
+  "https://www.ffg.at/",
+  "Austria",
+  "EUR_COUNTRY",
+  "Austria",
+  "Austriacka Agencja Promocji Badań — R&D grants."
+ ],
+ [
+  "NKFIH",
+  "https://nkfih.gov.hu/",
+  "Węgry",
+  "EUR_COUNTRY",
+  "Węgry",
+  "National Research, Development and Innovation Office (Węgry)."
+ ],
+ [
+  "Startarium",
+  "https://startarium.ro/",
+  "Rumunia",
+  "EUR_COUNTRY",
+  "Rumunia",
+  "Największa platforma startupowa w Rumunii."
+ ],
+ [
+  "Elevate Greece",
+  "https://elevategreece.gov.gr/",
+  "Grecja",
+  "EUR_COUNTRY",
+  "Grecja",
+  "Krajowy rejestr startupów + programy wsparcia."
+ ],
+ [
+  "ELIDEK",
+  "https://www.elidek.gr/",
+  "Grecja",
+  "EUR_COUNTRY",
+  "Grecja",
+  "Grecka Fundacja Badań i Innowacji."
+ ],
+ [
+  "Innovate UK / UKRI",
+  "https://apply-for-innovation-funding.service.gov.uk/competition/search",
+  "Wielka Brytania",
+  "EUR_COUNTRY",
+  "Wielka Brytania",
+  "Konkursy Innovate UK / UKRI."
+ ],
+ [
+  "gov.uk business finance support",
+  "https://www.gov.uk/business-finance-support",
+  "Wielka Brytania",
+  "EUR_COUNTRY",
+  "Wielka Brytania",
+  "Oficjalna baza wsparcia biznesu w UK."
+ ],
+ [
+  "Innosuisse",
+  "https://www.innosuisse.ch/",
+  "Szwajcaria",
+  "EUR_COUNTRY",
+  "Szwajcaria",
+  "Szwajcarska Agencja Innowacji."
+ ],
+ [
+  "Startup SG (Enterprise Singapore)",
+  "https://www.startupsg.gov.sg/",
+  "Singapur",
+  "ASIA",
+  "Singapur",
+  "Portal Startup SG — programy Enterprise Singapore."
+ ],
+ [
+  "Business Grants Portal SG",
+  "https://www.gobusiness.gov.sg/",
+  "Singapur",
+  "ASIA",
+  "Singapur",
+  "Singapurski portal do składania wniosków o granty."
+ ],
+ [
+  "A*STAR",
+  "https://www.a-star.edu.sg/",
+  "Singapur",
+  "ASIA",
+  "Singapur",
+  "Agency for Science, Technology and Research — programy R&D."
+ ],
+ [
+  "Startup India",
+  "https://www.startupindia.gov.in/",
+  "Indie",
+  "ASIA",
+  "Indie",
+  "Krajowy portal Startup India (DPIIT)."
+ ],
+ [
+  "DST India",
+  "https://dst.gov.in/",
+  "Indie",
+  "ASIA",
+  "Indie",
+  "Department of Science & Technology — TDB, NIDHI, TIDE."
+ ],
+ [
+  "BIRAC",
+  "https://www.birac.nic.in/",
+  "Indie",
+  "ASIA",
+  "Indie",
+  "Biotechnology Industry Research Assistance Council — biotech grants."
+ ],
+ [
+  "MeitY Startup Hub",
+  "https://msh.meity.gov.in/",
+  "Indie",
+  "ASIA",
+  "Indie",
+  "Ministry of Electronics & IT — programy dla IT/deeptech startupów."
+ ],
+ [
+  "NEDO",
+  "https://www.nedo.go.jp/english/",
+  "Japonia",
+  "ASIA",
+  "Japonia",
+  "Japońska agencja NEDO — SBIR-J, Green Innovation Fund."
+ ],
+ [
+  "JETRO",
+  "https://www.jetro.go.jp/en/",
+  "Japonia",
+  "ASIA",
+  "Japonia",
+  "Japan External Trade Organization — pomoc dla zagranicznych startupów w JP."
+ ],
+ [
+  "J-Startup",
+  "https://www.j-startup.go.jp/en/",
+  "Japonia",
+  "ASIA",
+  "Japonia",
+  "Rządowy program flagowy dla ambitnych startupów japońskich."
+ ],
+ [
+  "KISED / K-Startup",
+  "https://www.k-startup.go.kr/",
+  "Korea Południowa",
+  "ASIA",
+  "Korea Południowa",
+  "Główny portal koreańskich programów startupowych."
+ ],
+ [
+  "TIPS (Korea)",
+  "https://www.jointips.or.kr/",
+  "Korea Południowa",
+  "ASIA",
+  "Korea Południowa",
+  "Portal Tech Incubator Program for Startups."
+ ],
+ [
+  "KOTRA",
+  "https://www.kotra.or.kr/",
+  "Korea Południowa",
+  "ASIA",
+  "Korea Południowa",
+  "Agencja handlu i inwestycji — programy globalne dla KR startupów."
+ ],
+ [
+  "NIA Thailand",
+  "https://www.nia.or.th/",
+  "Tajlandia",
+  "ASIA",
+  "Tajlandia",
+  "National Innovation Agency Thailand."
+ ],
+ [
+  "MDEC (Malezja)",
+  "https://mdec.my/",
+  "Malezja",
+  "ASIA",
+  "Malezja",
+  "Malaysia Digital Economy Corporation — MSC + Malaysia Digital."
+ ],
+ [
+  "MTDC",
+  "https://www.mtdc.com.my/",
+  "Malezja",
+  "ASIA",
+  "Malezja",
+  "Malaysian Technology Development Corporation — komercjalizacja."
+ ],
+ [
+  "Kominfo (Indonezja)",
+  "https://www.kominfo.go.id/",
+  "Indonezja",
+  "ASIA",
+  "Indonezja",
+  "Ministerstwo Komunikacji i Informatyki — programy digital."
+ ],
+ [
+  "NSSI Vietnam",
+  "https://nssi.gov.vn/",
+  "Wietnam",
+  "ASIA",
+  "Wietnam",
+  "National Startup Support Initiative Wietnam."
+ ],
+ [
+  "MOST China",
+  "http://www.most.gov.cn/eng/",
+  "Chiny",
+  "ASIA",
+  "Chiny",
+  "Ministry of Science and Technology of PRC."
+ ],
+ [
+  "Israel Innovation Authority",
+  "https://innovationisrael.org.il/en/",
+  "Izrael",
+  "MENA",
+  "Izrael",
+  "IIA — wszystkie programy (Tnufa, Incubators, R&D Fund, Investment)."
+ ],
+ [
+  "MATIMOP",
+  "https://www.matimop.org.il/",
+  "Izrael",
+  "MENA",
+  "Izrael",
+  "Israeli Industry Center for R&D — międzynarodowe programy R&D."
+ ],
+ [
+  "Startup Nation Central",
+  "https://startupnationcentral.org/",
+  "Izrael",
+  "MENA",
+  "Izrael",
+  "Baza izraelskich startupów, mapy ekosystemu, raporty."
+ ],
+ [
+  "Hub71",
+  "https://hub71.com/",
+  "ZEA",
+  "MENA",
+  "ZEA",
+  "Abu Dhabi tech ecosystem — equity-free access programme."
+ ],
+ [
+  "MBRIF",
+  "https://www.mbrif.ae/",
+  "ZEA",
+  "MENA",
+  "ZEA",
+  "Mohammed bin Rashid Innovation Fund — gwarancje + akceleracja."
+ ],
+ [
+  "Sheraa (Sharjah)",
+  "https://sheraa.ae/",
+  "ZEA",
+  "MENA",
+  "ZEA",
+  "Sharjah Entrepreneurship Center — programy startupowe."
+ ],
+ [
+  "DTEC (Dubai)",
+  "https://dtec.ae/",
+  "ZEA",
+  "MENA",
+  "ZEA",
+  "Dubai Technology Entrepreneur Campus."
+ ],
+ [
+  "Monsha'at",
+  "https://www.monshaat.gov.sa/en",
+  "Arabia Saudyjska",
+  "MENA",
+  "Arabia Saudyjska",
+  "General Authority for SMEs — programy dla saudyjskich MŚP."
+ ],
+ [
+  "KACST",
+  "https://www.kacst.gov.sa/",
+  "Arabia Saudyjska",
+  "MENA",
+  "Arabia Saudyjska",
+  "King Abdulaziz City for Science and Technology — R&D grants."
+ ],
+ [
+  "Qatar Science & Technology Park",
+  "https://www.qstp.org.qa/",
+  "Katar",
+  "MENA",
+  "Katar",
+  "QSTP — akcelerator + inkubator + granty."
+ ],
+ [
+  "QBIC",
+  "https://www.qbic.qa/",
+  "Katar",
+  "MENA",
+  "Katar",
+  "Qatar Business Incubation Center."
+ ],
+ [
+  "KOSGEB",
+  "https://www.kosgeb.gov.tr/",
+  "Turcja",
+  "MENA",
+  "Turcja",
+  "Small and Medium Enterprises Development Organization TR."
+ ],
+ [
+  "TÜBİTAK",
+  "https://www.tubitak.gov.tr/en",
+  "Turcja",
+  "MENA",
+  "Turcja",
+  "Turecka Rada Badawcza — 1512 BiGG, 1507, 1501."
+ ],
+ [
+  "ITIDA",
+  "https://itida.gov.eg/",
+  "Egipt",
+  "MENA",
+  "Egipt",
+  "Information Technology Industry Development Agency — programy dla IT startupów."
+ ],
+ [
+  "Wamda",
+  "https://www.wamda.com/",
+  "MENA",
+  "MENA",
+  "Regionalne",
+  "Media + dane finansowania startupów w MENA."
+ ],
+ [
+  "SBIR.gov",
+  "https://www.sbir.gov/",
+  "USA",
+  "NAMER",
+  "USA",
+  "Centralny portal SBIR/STTR — 11 agencji federalnych."
+ ],
+ [
+  "Grants.gov",
+  "https://www.grants.gov/",
+  "USA",
+  "NAMER",
+  "USA",
+  "Federalny portal wszystkich programów grantowych rządu USA."
+ ],
+ [
+  "SBA — Small Business Administration",
+  "https://www.sba.gov/funding-programs/grants",
+  "USA",
+  "NAMER",
+  "USA",
+  "Programy SBA + gateway do federalnych grantów."
+ ],
+ [
+  "NSF SBIR (America's Seed Fund)",
+  "https://seedfund.nsf.gov/",
+  "USA",
+  "NAMER",
+  "USA",
+  "NSF SBIR/STTR dla deeptech i hard-tech."
+ ],
+ [
+  "NIH SBIR/STTR",
+  "https://seed.nih.gov/",
+  "USA",
+  "NAMER",
+  "USA",
+  "NIH biomed/health grants + edukacja."
+ ],
+ [
+  "NASA SBIR/STTR",
+  "https://www.nasa.gov/sbir_sttr/",
+  "USA",
+  "NAMER",
+  "USA",
+  "NASA SBIR + STTR appendices."
+ ],
+ [
+  "DoD SBIR/STTR",
+  "https://www.dodsbirsttr.mil/",
+  "USA",
+  "NAMER",
+  "USA",
+  "Department of Defense SBIR portal — wszystkie komponenty."
+ ],
+ [
+  "DOE SBIR",
+  "https://science.osti.gov/sbir",
+  "USA",
+  "NAMER",
+  "USA",
+  "Department of Energy SBIR."
+ ],
+ [
+  "USDA NIFA SBIR",
+  "https://www.nifa.usda.gov/grants/programs/sbir-sttr",
+  "USA",
+  "NAMER",
+  "USA",
+  "USDA NIFA SBIR — agri/food/rural."
+ ],
+ [
+  "Economic Development Administration",
+  "https://www.eda.gov/",
+  "USA",
+  "NAMER",
+  "USA",
+  "EDA — programy regionalnego rozwoju + Build Back Better."
+ ],
+ [
+  "NRC IRAP",
+  "https://nrc.canada.ca/en/support-technology-innovation",
+  "Kanada",
+  "NAMER",
+  "Kanada",
+  "National Research Council — IRAP grants."
+ ],
+ [
+  "Innovation, Science and Economic Development Canada",
+  "https://ic.gc.ca/",
+  "Kanada",
+  "NAMER",
+  "Kanada",
+  "ISED — federalne programy wsparcia biznesu."
+ ],
+ [
+  "CanadaBusiness",
+  "https://canadabusiness.ca/",
+  "Kanada",
+  "NAMER",
+  "Kanada",
+  "Federalny portal wsparcia biznesu w Kanadzie."
+ ],
+ [
+  "Futurpreneur Canada",
+  "https://futurpreneur.ca/",
+  "Kanada",
+  "NAMER",
+  "Kanada",
+  "Program dla founderów 18-39."
+ ],
+ [
+  "SR&ED",
+  "https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html",
+  "Kanada",
+  "NAMER",
+  "Kanada",
+  "Scientific Research & Experimental Development — federalna ulga R&D."
+ ],
+ [
+  "gob.mx/inadem (Mexico)",
+  "https://www.gob.mx/se",
+  "Meksyk",
+  "NAMER",
+  "Meksyk",
+  "Secretaría de Economía — programy MŚP + INADEM historycznie."
+ ],
+ [
+  "Nacional Financiera (Nafin)",
+  "https://www.nafin.com/",
+  "Meksyk",
+  "NAMER",
+  "Meksyk",
+  "Państwowy bank rozwoju + programy dla MŚP."
+ ]
+]

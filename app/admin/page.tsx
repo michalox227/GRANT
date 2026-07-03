@@ -4,9 +4,24 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const programs = await prisma.program.findMany({
-    orderBy: [{ updatedAt: "desc" }],
-  });
+  let programs;
+  try {
+    programs = await prisma.program.findMany({
+      orderBy: [{ updatedAt: "desc" }],
+    });
+  } catch {
+    return (
+      <div className="max-w-3xl mx-auto p-8">
+        <h1 className="text-2xl font-bold mb-3">Panel admina</h1>
+        <div className="bg-amber-50 border border-amber-300 text-amber-800 rounded-lg p-4 text-sm">
+          Baza danych nie jest podłączona (brak <code>DATABASE_URL</code>). Frontend działa na
+          wbudowanym zestawie danych. Aby edytować programy przez panel, podłącz Postgres
+          (np. Neon / Supabase / Vercel Postgres), ustaw <code>DATABASE_URL</code> w ustawieniach
+          hostingu i uruchom <code>prisma db push &amp;&amp; prisma db seed</code>.
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="max-w-6xl mx-auto p-4 space-y-4">
       <div className="flex items-center justify-between">
