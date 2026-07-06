@@ -1,0 +1,148 @@
+{
+  "checked_at": "2026-07-03",
+  "total": 157,
+  "missing_fields": [],
+  "expired_deadlines": [],
+  "duplicate_urls": [
+    {
+      "url": "https://feng.parp.gov.pl/",
+      "programs": [
+        "Startup Booster Poland (FENG)",
+        "STEP – Biotech (FENG)"
+      ]
+    },
+    {
+      "url": "https://feng.parp.gov.pl/",
+      "programs": [
+        "STEP – Biotech (FENG)",
+        "STEP – Digital & Deeptech (FENG)"
+      ]
+    },
+    {
+      "url": "https://feng.parp.gov.pl/",
+      "programs": [
+        "STEP – Digital & Deeptech (FENG)",
+        "STEP – Cleantech (FENG)"
+      ]
+    },
+    {
+      "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en",
+      "programs": [
+        "EIC Accelerator – cut-off 4 listopada 2026",
+        "EIC Accelerator – cut-off maj 2027"
+      ]
+    },
+    {
+      "url": "https://www.eurekanetwork.org/programmes-and-calls/eurostars/",
+      "programs": [
+        "Eurostars Call 11",
+        "Eurostars Call 12 (marzec 2027)"
+      ]
+    },
+    {
+      "url": "https://www.exist.de/",
+      "programs": [
+        "EXIST Gründerstipendium (deadline 3.08.2026)",
+        "EXIST Gründerstipendium (luty 2027)"
+      ]
+    },
+    {
+      "url": "https://apply-for-innovation-funding.service.gov.uk/competition/search",
+      "programs": [
+        "Innovate UK – Quantum Computing Applications 2026",
+        "Innovate UK – Pre-Commercialisation 2026"
+      ]
+    },
+    {
+      "url": "https://apply-for-innovation-funding.service.gov.uk/competition/search",
+      "programs": [
+        "Innovate UK – Pre-Commercialisation 2026",
+        "Innovate UK – Smart Grants (pilot)"
+      ]
+    },
+    {
+      "url": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
+      "programs": [
+        "NIH SBIR/STTR – Omnibus (wrzesień 2026)",
+        "NIH SBIR/STTR – Omnibus (styczeń 2027)"
+      ]
+    },
+    {
+      "url": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
+      "programs": [
+        "NIH SBIR/STTR – Omnibus (styczeń 2027)",
+        "NIH SBIR/STTR – Omnibus (kwiecień 2027)"
+      ]
+    },
+    {
+      "url": "https://www.parp.gov.pl/",
+      "programs": [
+        "Laboratorium Innowatora",
+        "PARP – Design dla Przedsiębiorców"
+      ]
+    },
+    {
+      "url": "https://www.parp.gov.pl/",
+      "programs": [
+        "PARP – Design dla Przedsiębiorców",
+        "Program Rozwoju Talentów Informatycznych – Ośrodki Kompetencji"
+      ]
+    },
+    {
+      "url": "https://www.gov.pl/web/ncbr/harmonogram-konkursow-2026",
+      "programs": [
+        "Ścieżka SMART – duże firmy (FENG, NCBR)",
+        "Innowacje w obszarze wód – konkurs NCBR"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+      "programs": [
+        "Horizon Europe – Cluster 5 (Climate, Energy, Mobility)",
+        "Horizon Europe – Cluster 6 (Food, Bioeconomy, Environment)"
+      ]
+    },
+    {
+      "url": "https://erc.europa.eu/",
+      "programs": [
+        "ERC Starting Grant 2027",
+        "ERC Consolidator Grant 2027"
+      ]
+    },
+    {
+      "url": "https://www.cdti.es/",
+      "programs": [
+        "CDTI NEOTEC (Hiszpania)",
+        "CDTI PID Estratégico (ES)"
+      ]
+    },
+    {
+      "url": "https://apply-for-innovation-funding.service.gov.uk/competition/search",
+      "programs": [
+        "Innovate UK – Smart Grants (pilot)",
+        "Innovate UK – Made Smarter Innovation 2026"
+      ]
+    },
+    {
+      "url": "https://innovationsfonden.dk/en",
+      "programs": [
+        "Innovation Fund Denmark – Innobooster",
+        "Grand Solutions (DK)"
+      ]
+    },
+    {
+      "url": "https://www.jointips.or.kr/",
+      "programs": [
+        "Korea TIPS (Tech Incubator Program for Startups)",
+        "TIPS Global Program"
+      ]
+    },
+    {
+      "url": "https://www.nia.or.th/",
+      "programs": [
+        "NIA Thailand – Startup Fund",
+        "NIA Startup Grant Thailand (2027 round)"
+      ]
+    }
+  ]
+}
