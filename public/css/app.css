@@ -109,9 +109,62 @@
   .country { fill: var(--map-land); stroke: var(--map-land-stroke); stroke-width: 0.5;
     vector-effect: non-scaling-stroke; transition: fill 150ms; }
   .country:hover { fill: var(--map-land-hover); }
-  .country.has-programs { fill: #1b3350; cursor: pointer; }
-  .country.has-programs:hover { fill: #24446b; }
-  .country.active-country { fill: rgba(45,212,191,0.28); stroke: var(--accent); }
+  /* choropleth: intensywność wg liczby programów */
+  .country.has-programs { cursor: pointer; }
+  .country.c1 { fill: #1a2f4c; }
+  .country.c2 { fill: #1f3c62; }
+  .country.c3 { fill: #255081; }
+  .country.c4 { fill: #2b64a0; }
+  .country.has-programs:hover { fill: #3577bd; }
+  .country.active-country { fill: rgba(45,212,191,0.35); stroke: var(--accent); stroke-width: 1; }
+
+  /* własny tooltip mapy */
+  .map-tip { position: absolute; pointer-events: none; z-index: 30;
+    background: rgba(8,14,26,0.95); border: 1px solid var(--line-strong);
+    border-radius: 8px; padding: 7px 11px; font-size: 12px; color: var(--ink);
+    max-width: 260px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); display: none; }
+  .map-tip .t-title { font-weight: 700; }
+  .map-tip .t-sub { color: var(--muted); font-size: 11px; margin-top: 1px; }
+  .map-tip .t-cta { color: var(--accent); font-size: 10.5px; margin-top: 3px; }
+
+  /* klastry (bąble z liczbą programów przy oddaleniu) */
+  .cluster { cursor: pointer; }
+  .cluster circle { fill: rgba(45,212,191,0.2); stroke: var(--accent); stroke-width: 1.4; }
+  .cluster:hover circle { fill: rgba(45,212,191,0.35); }
+  .cluster text { fill: var(--ink); font-size: 11px; font-weight: 700;
+    text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+
+  /* panel logowania */
+  .user-chip { display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.07); border: 1px solid var(--line-strong);
+    border-radius: 999px; padding: 4px 12px; font-size: 12px; color: var(--ink); }
+  .user-chip .avatar { width: 20px; height: 20px; border-radius: 50%;
+    background: var(--accent); color: #04211d; display: inline-flex;
+    align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
+  .user-chip button { background: none; border: none; color: var(--muted); font-size: 11px; padding: 0; }
+  .user-chip button:hover { color: var(--ink); }
+  .btn-login { background: var(--accent); color: #04211d; border: none;
+    border-radius: 999px; padding: 5px 14px; font-size: 12.5px; font-weight: 700; }
+  .btn-login:hover { background: #5eead4; }
+  .modal-back { position: fixed; inset: 0; background: rgba(2,6,13,0.7);
+    backdrop-filter: blur(4px); z-index: 100; display: none;
+    align-items: center; justify-content: center; }
+  .modal-back.open { display: flex; }
+  .modal { background: var(--panel-raise); border: 1px solid var(--line-strong);
+    border-radius: 14px; padding: 24px; width: min(400px, 92vw);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+  .modal h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: -0.01em; }
+  .modal .sub { color: var(--muted); font-size: 12.5px; margin-bottom: 16px; }
+  .modal label { display: block; font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--muted); font-weight: 600; margin: 12px 0 4px; }
+  .modal input { width: 100%; padding: 9px 11px; border: 1px solid var(--line-strong);
+    border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; }
+  .modal input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .modal .actions { display: flex; gap: 8px; margin-top: 18px; }
+  .modal .actions .btn-login { flex: 1; padding: 9px; }
+  .modal .btn-cancel { background: none; border: 1px solid var(--line-strong);
+    color: var(--ink-soft); border-radius: 8px; padding: 9px 14px; }
+  .modal .note { margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.5; }
   .graticule { fill: none; stroke: var(--map-graticule); stroke-width: 0.5;
     vector-effect: non-scaling-stroke; opacity: 0.8; }
   .marker { cursor: pointer; transition: opacity 200ms; }

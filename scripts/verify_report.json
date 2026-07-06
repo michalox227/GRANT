@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-07-03",
-  "total": 157,
+  "checked_at": "2026-07-06",
+  "total": 277,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -142,6 +142,118 @@
       "programs": [
         "NIA Thailand – Startup Fund",
         "NIA Startup Grant Thailand (2027 round)"
+      ]
+    },
+    {
+      "url": "https://www.parp.gov.pl/",
+      "programs": [
+        "Program Rozwoju Talentów Informatycznych – Ośrodki Kompetencji",
+        "Bon na cyfryzację (PARP)"
+      ]
+    },
+    {
+      "url": "https://www.exist.de/",
+      "programs": [
+        "EXIST Gründerstipendium (luty 2027)",
+        "EXIST Women"
+      ]
+    },
+    {
+      "url": "https://www.bpifrance.fr/",
+      "programs": [
+        "Concours i-PhD",
+        "France 2030 – Première Usine"
+      ]
+    },
+    {
+      "url": "https://www.nvidia.com/en-us/startups/",
+      "programs": [
+        "NVIDIA Inception (equity-free)",
+        "NVIDIA Inception Capital Connect"
+      ]
+    },
+    {
+      "url": "https://innovationisrael.org.il/en/",
+      "programs": [
+        "IIA – R&D Fund (Track 1)",
+        "IIA – Technological Incubators"
+      ]
+    },
+    {
+      "url": "https://innovationisrael.org.il/en/",
+      "programs": [
+        "IIA – Technological Incubators",
+        "IIA – Seed Fund (matching)"
+      ]
+    },
+    {
+      "url": "https://innovationisrael.org.il/en/",
+      "programs": [
+        "IIA – Seed Fund (matching)",
+        "IIA – Ofek (aerospace)"
+      ]
+    },
+    {
+      "url": "https://innovationisrael.org.il/en/",
+      "programs": [
+        "IIA – Ofek (aerospace)",
+        "IIA – Human Capital Fund"
+      ]
+    },
+    {
+      "url": "https://www.nedo.go.jp/english/",
+      "programs": [
+        "NEDO – Japan Startup Support (SBIR-J)",
+        "NEDO – Deep Tech Startups Support (DTSU)"
+      ]
+    },
+    {
+      "url": "https://www.jointips.or.kr/",
+      "programs": [
+        "TIPS Global Program",
+        "Post-TIPS / Scale-up TIPS"
+      ]
+    },
+    {
+      "url": "https://www.k-startup.go.kr/",
+      "programs": [
+        "Pre-TIPS",
+        "OASIS (startup visa KR)"
+      ]
+    },
+    {
+      "url": "https://www.startupindia.gov.in/",
+      "programs": [
+        "CGSS – Credit Guarantee for Startups",
+        "Startup India – Tax Exemption 80-IAC"
+      ]
+    },
+    {
+      "url": "https://www.birac.nic.in/",
+      "programs": [
+        "BIRAC BIG (Biotechnology Ignition Grant)",
+        "BIRAC – SEED & LEAP Funds"
+      ]
+    },
+    {
+      "url": "https://business.gov.au/",
+      "programs": [
+        "Cooperative Research Centres Projects (CRC-P)",
+        "Global Innovation Linkages"
+      ]
+    },
+    {
+      "url": "https://advance.qld.gov.au/",
+      "programs": [
+        "Queensland Ignite Ideas Fund",
+        "Advance Queensland – Female Founders"
+      ]
+    },
+    {
+      "url": "https://albertainnovates.ca/",
+      "programs": [
+        "Alberta Innovates – Technology Development Advancement",
+        "Alberta Innovates – AI Voucher"
       ]
     }
   ]

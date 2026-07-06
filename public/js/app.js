@@ -1,4 +1,4 @@
-// Logika platformy: mapa, filtry, kalendarz, liczniki, pinezki, porównanie
+// Logika platformy
 // ============================================================================
 // TOPOJSON WORLD BOUNDARIES (Natural Earth 110m, ~108KB)
 // ============================================================================
@@ -114,14 +114,65 @@ function inferStage(p) {
   return "NEW";
 }
 
-// bookmark storage
-const STORAGE_KEY = "grant-atlas-bookmarks-v1";
+// ── Profil użytkownika (lokalny) + bookmarki per profil ──
+const USER_KEY = "grant-atlas-user";
+function loadUser() {
+  try { return JSON.parse(localStorage.getItem(USER_KEY) || "null"); }
+  catch { return null; }
+}
+let currentUser = loadUser();
+
+function bookmarksKey() {
+  return currentUser ? "grant-atlas-bookmarks-" + currentUser.email : "grant-atlas-bookmarks-v1";
+}
 function loadBookmarks() {
-  try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")); }
+  try { return new Set(JSON.parse(localStorage.getItem(bookmarksKey()) || "[]")); }
   catch { return new Set(); }
 }
-function saveBookmarks() { localStorage.setItem(STORAGE_KEY, JSON.stringify([...bookmarks])); }
+function saveBookmarks() { localStorage.setItem(bookmarksKey(), JSON.stringify([...bookmarks])); }
 let bookmarks = loadBookmarks();
+
+function renderAuth() {
+  const area = document.getElementById("auth-area");
+  if (!area) return;
+  if (currentUser) {
+    const initial = (currentUser.name || "?").trim().charAt(0).toUpperCase();
+    area.innerHTML = '<span class="user-chip"><span class="avatar">' + escapeHTML(initial) + '</span>' +
+      escapeHTML(currentUser.name) + ' <button id="logout-btn" title="Wyloguj">wyloguj</button></span>';
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      currentUser = null;
+      localStorage.removeItem(USER_KEY);
+      bookmarks = loadBookmarks(); // wróć do bookmarków gościa
+      renderAuth(); render();
+    });
+  } else {
+    area.innerHTML = '<button class="btn-login" id="login-btn">Zaloguj</button>';
+    document.getElementById("login-btn").addEventListener("click", () => {
+      document.getElementById("login-modal").classList.add("open");
+      document.getElementById("login-name").focus();
+    });
+  }
+}
+document.getElementById("login-cancel").addEventListener("click", () => {
+  document.getElementById("login-modal").classList.remove("open");
+});
+document.getElementById("login-modal").addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
+});
+document.getElementById("login-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("login-name").value.trim();
+  const email = document.getElementById("login-email").value.trim().toLowerCase();
+  if (!name || !email) return;
+  const guestBookmarks = [...bookmarks]; // zachowaj pinezki sprzed logowania
+  currentUser = { name, email, loggedAt: new Date().toISOString() };
+  localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+  bookmarks = loadBookmarks();
+  guestBookmarks.forEach(id => bookmarks.add(id)); // scal pinezki gościa z profilem
+  saveBookmarks();
+  document.getElementById("login-modal").classList.remove("open");
+  renderAuth(); render();
+});
 
 // Assign stable id + backfill pochodne pola (wywoływane w boot(), po ewentualnym
 // nadpisaniu P danymi z API — dzięki temu ta sama strona działa statycznie i jako front API)
@@ -294,15 +345,26 @@ function buildMap() {
       path.dataset.cc = iso2;
       path.addEventListener("click", () => {
         if (!path.classList.contains("has-programs")) return;
-        // klik w kraj = przełącz filtr kraju
-        state.country = state.country === iso2 ? "ALL" : iso2;
+        // klik w kraj = filtr + zbliżenie; drugi klik = wyczyść i oddal
+        if (state.country === iso2) {
+          state.country = "ALL";
+          mapZoom = 1; mapPanX = 0; mapPanY = 0; applyMapTransform();
+        } else {
+          state.country = iso2;
+          zoomToCountry(path);
+        }
         document.getElementById("sel-country").value = state.country;
         render();
       });
+      path.addEventListener("mousemove", (e) => {
+        const n = Number(path.dataset.count || 0);
+        if (n === 0) { hideTip(); return; }
+        showTip(e, '<div class="t-title">' + escapeHTML(name) + '</div>' +
+          '<div class="t-sub">' + n + ' ' + (n === 1 ? "program" : "programów") + '</div>' +
+          '<div class="t-cta">kliknij, aby filtrować i przybliżyć</div>');
+      });
+      path.addEventListener("mouseleave", hideTip);
     }
-    const title = document.createElementNS(ns, "title");
-    title.textContent = name;
-    path.appendChild(title);
     landG.appendChild(path);
   });
   rootG.appendChild(landG);
@@ -322,9 +384,14 @@ function buildMap() {
     c.setAttribute("class", "marker");
     c.setAttribute("data-id", p.id);
     c.addEventListener("click", (e) => { e.stopPropagation(); selectProgram(p.id); });
-    const title = document.createElementNS(ns, "title");
-    title.textContent = p.name + " · " + p.country;
-    c.appendChild(title);
+    c.addEventListener("mousemove", (e) => {
+      const cd = countdown(p);
+      showTip(e, '<div class="t-title">' + escapeHTML(p.shortName || p.name) + '</div>' +
+        '<div class="t-sub">' + escapeHTML(p.country) + ' · ' + escapeHTML(p.organizer) + '</div>' +
+        (cd.html ? '<div class="t-sub">' + cd.html + '</div>' : "") +
+        '<div class="t-cta">kliknij, aby zobaczyć szczegóły</div>');
+    });
+    c.addEventListener("mouseleave", hideTip);
     markersG.appendChild(c);
   });
   rootG.appendChild(markersG);
@@ -332,18 +399,103 @@ function buildMap() {
   applyMapTransform(true);
 }
 
-// Podświetlenie krajów, w których są programy pasujące do filtrów
+// ── Tooltip mapy (własny, zamiast <title>) ──
+const mapTip = () => document.getElementById("map-tip");
+function showTip(e, html) {
+  const tip = mapTip();
+  if (!tip) return;
+  tip.innerHTML = html;
+  tip.style.display = "block";
+  const wrap = tip.parentElement.getBoundingClientRect();
+  let x = e.clientX - wrap.left + 14, y = e.clientY - wrap.top + 14;
+  if (x + 270 > wrap.width) x = e.clientX - wrap.left - 270;
+  if (y + 90 > wrap.height) y = e.clientY - wrap.top - 90;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip() { const t = mapTip(); if (t) t.style.display = "none"; }
+
+// Zoom do bbox kraju (po kliknięciu)
+function zoomToCountry(path) {
+  const b = path.getBBox();
+  const targetZoom = Math.max(1.4, Math.min(MAX_ZOOM, 0.72 * Math.min(MAP_W / b.width, MAP_H / b.height)));
+  mapZoom = targetZoom;
+  mapPanX = MAP_W / 2 - (b.x + b.width / 2) * targetZoom;
+  mapPanY = MAP_H / 2 - (b.y + b.height / 2) * targetZoom;
+  applyMapTransform();
+}
+
+// Choropleth: intensywność koloru wg liczby programów + tooltip krajów
 function highlightCountries(matchedPrograms) {
   const counts = new Map();
   matchedPrograms.forEach(p => counts.set(p.cc, (counts.get(p.cc) ?? 0) + 1));
   document.querySelectorAll(".country").forEach(c => {
     const cc = c.dataset.cc;
     const n = cc ? (counts.get(cc) ?? 0) : 0;
+    c.dataset.count = n;
     c.classList.toggle("has-programs", n > 0);
+    c.classList.toggle("c1", n >= 1 && n <= 2);
+    c.classList.toggle("c2", n >= 3 && n <= 5);
+    c.classList.toggle("c3", n >= 6 && n <= 10);
+    c.classList.toggle("c4", n >= 11);
     c.classList.toggle("active-country", !!cc && state.country === cc);
-    const t = c.querySelector("title");
-    if (t) t.textContent = c.dataset.name + (n > 0 ? ` — ${n} ${n === 1 ? "program" : "programów"} (kliknij, by filtrować)` : "");
   });
+  buildClusters(counts);
+}
+
+// ── Klastry: przy oddaleniu jeden bąbel z liczbą programów na kraj ──
+const CLUSTER_ZOOM_LIMIT = 2; // poniżej tego zoomu pokazuj klastry zamiast markerów
+function clusterCentroid(cc, matched) {
+  const items = matched.filter(p => p.cc === cc);
+  const lat = items.reduce((s, p) => s + p.lat, 0) / items.length;
+  const lng = items.reduce((s, p) => s + p.lng, 0) / items.length;
+  return proj(lat, lng);
+}
+let lastCounts = new Map();
+function buildClusters(counts) {
+  lastCounts = counts;
+  const ns = "http://www.w3.org/2000/svg";
+  const root = document.getElementById("map-root");
+  if (!root) return;
+  let g = document.getElementById("clusters");
+  if (g) g.remove();
+  g = document.createElementNS(ns, "g");
+  g.setAttribute("id", "clusters");
+  const matched = filtered();
+  counts.forEach((n, cc) => {
+    if (n === 0) return;
+    const { x, y } = clusterCentroid(cc, matched);
+    const cl = document.createElementNS(ns, "g");
+    cl.setAttribute("class", "cluster");
+    cl.dataset.cc = cc;
+    const r = Math.min(16, 7 + Math.sqrt(n) * 2);
+    const circle = document.createElementNS(ns, "circle");
+    circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", r);
+    const label = document.createElementNS(ns, "text");
+    label.setAttribute("x", x); label.setAttribute("y", y);
+    label.textContent = n;
+    cl.appendChild(circle); cl.appendChild(label);
+    cl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      zoomAt(x, y, 3 / mapZoom); // wskocz na zoom ~3 w ten punkt
+    });
+    cl.addEventListener("mousemove", (e) => {
+      const country = P.find(p => p.cc === cc)?.country || cc;
+      showTip(e, '<div class="t-title">' + escapeHTML(country) + '</div>' +
+        '<div class="t-sub">' + n + ' ' + (n === 1 ? "program" : "programów") + ' pasujących do filtrów</div>' +
+        '<div class="t-cta">kliknij, aby przybliżyć</div>');
+    });
+    cl.addEventListener("mouseleave", hideTip);
+    g.appendChild(cl);
+  });
+  root.appendChild(g);
+  updateClusterVisibility();
+}
+function updateClusterVisibility() {
+  const clusters = document.getElementById("clusters");
+  const markers = document.getElementById("markers");
+  const clusterMode = mapZoom < CLUSTER_ZOOM_LIMIT;
+  if (clusters) clusters.style.display = clusterMode ? "" : "none";
+  if (markers) markers.style.display = clusterMode ? "none" : "";
 }
 
 const MAX_ZOOM = 10;
@@ -366,6 +518,7 @@ function applyMapTransform(instant) {
   // markery zachowują stały rozmiar ekranowy niezależnie od zoomu
   const r = 4.5 / Math.sqrt(mapZoom);
   const sw = 1.5 / Math.sqrt(mapZoom);
+  updateClusterVisibility();
   document.querySelectorAll(".marker").forEach(m => {
     const sel = m.classList.contains("selected");
     m.setAttribute("r", sel ? r * 1.6 : r);
@@ -812,6 +965,7 @@ async function boot() {
   populateSelects();
   buildMap();
   buildCalendar();
+  renderAuth();
   render();
 }
 boot();

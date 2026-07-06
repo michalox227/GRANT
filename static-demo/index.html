@@ -17,7 +17,30 @@
   <div class="top-meta">
     zakres: <strong>1 sierpnia 2026 → 1 sierpnia 2027</strong> · <span id="loaded-count">…</span> programów · <span id="aggs-count">…</span> agregatorów
   </div>
+  <div id="auth-area"></div>
 </header>
+
+<div class="modal-back" id="login-modal">
+  <div class="modal">
+    <h2>Zaloguj się do Grant Atlas</h2>
+    <div class="sub">Twoje pinezki 📌 i ustawienia będą przypisane do Twojego profilu.</div>
+    <form id="login-form">
+      <label for="login-name">Imię / nazwa</label>
+      <input id="login-name" type="text" required autocomplete="name" placeholder="np. Michał" />
+      <label for="login-email">E-mail</label>
+      <input id="login-email" type="email" required autocomplete="email" placeholder="ty@przyklad.pl" />
+      <div class="actions">
+        <button type="submit" class="btn-login">Zaloguj</button>
+        <button type="button" class="btn-cancel" id="login-cancel">Anuluj</button>
+      </div>
+    </form>
+    <div class="note">
+      Profil zapisywany lokalnie w tej przeglądarce (bez hasła i bez wysyłania danych).
+      Pełne konta z synchronizacją między urządzeniami będą dostępne w wersji z backendem
+      i bazą danych (panel admin już na nią czeka).
+    </div>
+  </div>
+</div>
 
 <div class="view-note" id="mode-note">
   Ładowanie danych…
@@ -105,7 +128,8 @@
     <div class="panel" style="padding: 0;">
       <div class="map-wrap">
         <svg class="map-svg" viewBox="0 0 1000 395" id="map" preserveAspectRatio="xMidYMid meet"></svg>
-        <div class="map-hint">scroll = zoom do kursora · przeciągnij = przesuń</div>
+        <div class="map-hint">scroll = zoom do kursora · przeciągnij = przesuń · klik kraju = filtr + zbliżenie</div>
+        <div class="map-tip" id="map-tip"></div>
         <div class="map-controls">
           <button class="map-btn" id="zoom-in" title="Przybliż">+</button>
           <button class="map-btn" id="zoom-out" title="Oddal">−</button>
