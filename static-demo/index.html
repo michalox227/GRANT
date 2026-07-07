@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grant Atlas</title>
+<title>Grant Atlas · Podgląd (VIII 2026 – VIII 2027)</title>
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -127,8 +127,14 @@
   <section>
     <div class="panel" style="padding: 0;">
       <div class="map-wrap">
-        <svg class="map-svg" viewBox="0 0 1000 395" id="map" preserveAspectRatio="xMidYMid meet"></svg>
-        <div class="map-hint">scroll = zoom do kursora · przeciągnij = przesuń · klik kraju = filtr + zbliżenie</div>
+        <svg class="map-svg" viewBox="0 0 1000 435" id="map" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="map-topbar">
+          <span class="map-stat"><span class="v" id="stat-programs">0</span><span class="k">programów</span></span>
+          <span class="map-stat"><span class="v" id="stat-countries">0</span><span class="k">krajów</span></span>
+          <span class="map-stat"><span class="v" id="stat-open">0</span><span class="k">otwartych teraz</span></span>
+          <span class="map-stat deadline"><span class="v" id="stat-next">—</span><span class="k">najbliższy deadline</span></span>
+          <span class="map-hint">scroll = zoom · przeciągnij = przesuń · klik kraju = filtr</span>
+        </div>
         <div class="map-tip" id="map-tip"></div>
         <div class="map-controls">
           <button class="map-btn" id="zoom-in" title="Przybliż">+</button>

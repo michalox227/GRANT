@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-07-06",
-  "total": 277,
+  "checked_at": "2026-07-07",
+  "total": 397,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -254,6 +254,251 @@
       "programs": [
         "Alberta Innovates – Technology Development Advancement",
         "Alberta Innovates – AI Voucher"
+      ]
+    },
+    {
+      "url": "https://www.cdti.es/",
+      "programs": [
+        "CDTI PID Estratégico (ES)",
+        "CDTI – Misiones Ciencia e Innovación"
+      ]
+    },
+    {
+      "url": "https://www.enisa.es/",
+      "programs": [
+        "ENISA Jóvenes Emprendedores (ES)",
+        "ENISA Emprendedoras Digitales"
+      ]
+    },
+    {
+      "url": "https://www.invitalia.it/",
+      "programs": [
+        "Smart Money (Invitalia)",
+        "Brevetti+ (patenty)"
+      ]
+    },
+    {
+      "url": "https://www.invitalia.it/",
+      "programs": [
+        "Brevetti+ (patenty)",
+        "Nuove Imprese a Tasso Zero"
+      ]
+    },
+    {
+      "url": "https://www.invitalia.it/",
+      "programs": [
+        "Nuove Imprese a Tasso Zero",
+        "Resto al Sud"
+      ]
+    },
+    {
+      "url": "https://www.cdpventurecapital.it/",
+      "programs": [
+        "Fondo Nazionale Innovazione (CDP VC)",
+        "CDP – Italia Venture II (Sud)"
+      ]
+    },
+    {
+      "url": "https://www.mimit.gov.it/",
+      "programs": [
+        "Voucher 3I (startup innovative)",
+        "MISE – Digital Transformation MŚP"
+      ]
+    },
+    {
+      "url": "https://www.rvo.nl/",
+      "programs": [
+        "Innovatiekrediet (RVO)",
+        "Vroegefasefinanciering (VFF)"
+      ]
+    },
+    {
+      "url": "https://www.rvo.nl/subsidies-financiering/mit",
+      "programs": [
+        "MIT (MKB Innovatiestimulering) – Netherlands",
+        "MIT Haalbaarheid (feasibility)"
+      ]
+    },
+    {
+      "url": "https://www.rvo.nl/subsidies-financiering/wbso",
+      "programs": [
+        "WBSO R&D Tax Credit (NL)",
+        "WBSO – starters (podwyższona stawka)"
+      ]
+    },
+    {
+      "url": "https://www.rvo.nl/",
+      "programs": [
+        "Vroegefasefinanciering (VFF)",
+        "Horizon NL – EIC ondersteuning"
+      ]
+    },
+    {
+      "url": "https://www.vlaio.be/",
+      "programs": [
+        "VLAIO – Onderzoeksproject (R&D)",
+        "VLAIO – Ontwikkelingsproject"
+      ]
+    },
+    {
+      "url": "https://recherche.wallonie.be/",
+      "programs": [
+        "SPW – Wallonie Recherche (Win4Company)",
+        "Wallonia – Chèques Innovation"
+      ]
+    },
+    {
+      "url": "https://www.aws.at/",
+      "programs": [
+        "aws Preseed – Innovative Solutions (AT)",
+        "aws Seedfinancing – Deep Tech"
+      ]
+    },
+    {
+      "url": "https://www.aws.at/",
+      "programs": [
+        "aws Seedfinancing – Deep Tech",
+        "aws First Incubator"
+      ]
+    },
+    {
+      "url": "https://www.ffg.at/",
+      "programs": [
+        "FFG – Spin-off Fellowship",
+        "FFG – Basisprogramm Kleinprojekt"
+      ]
+    },
+    {
+      "url": "https://www.innosuisse.ch/",
+      "programs": [
+        "Innosuisse – Innovation Projects",
+        "Innosuisse – Startup Coaching"
+      ]
+    },
+    {
+      "url": "https://www.innosuisse.ch/",
+      "programs": [
+        "Innosuisse – Startup Coaching",
+        "Innosuisse – Innocheck"
+      ]
+    },
+    {
+      "url": "https://www.czechinvest.org/",
+      "programs": [
+        "CzechInvest – Technology Incubation",
+        "CzechInvest – Czech Starter"
+      ]
+    },
+    {
+      "url": "https://www.czechinvest.org/",
+      "programs": [
+        "CzechInvest – Czech Starter",
+        "CzechDemo / CzechMatch"
+      ]
+    },
+    {
+      "url": "https://www.czechinvest.org/",
+      "programs": [
+        "CzechDemo / CzechMatch",
+        "Technologická inkubace (CzechInvest)"
+      ]
+    },
+    {
+      "url": "https://www.agentura-api.org/",
+      "programs": [
+        "OP TAK – Aplikace",
+        "OP TAK – Inovační vouchery"
+      ]
+    },
+    {
+      "url": "https://startupportugal.com/",
+      "programs": [
+        "Startup Portugal – Vale Incubação",
+        "Startup Portugal – Semente (tax)"
+      ]
+    },
+    {
+      "url": "https://startupportugal.com/",
+      "programs": [
+        "Startup Portugal – Semente (tax)",
+        "Startup Visa PT"
+      ]
+    },
+    {
+      "url": "https://www.iapmei.pt/",
+      "programs": [
+        "IAPMEI – StartUP Voucher (PT)",
+        "IAPMEI – Vale I&D"
+      ]
+    },
+    {
+      "url": "https://www.sting.co/",
+      "programs": [
+        "Sting (Sztokholm)",
+        "Swedish Incubators Ecosystem – Propel"
+      ]
+    },
+    {
+      "url": "https://innovationsfonden.dk/",
+      "programs": [
+        "Innobooster (kolejne rundy)",
+        "Innofounder"
+      ]
+    },
+    {
+      "url": "https://www.businessfinland.fi/",
+      "programs": [
+        "Business Finland – Tempo",
+        "Business Finland – Young Innovative Company"
+      ]
+    },
+    {
+      "url": "https://www.businessfinland.fi/",
+      "programs": [
+        "Business Finland – Young Innovative Company",
+        "Business Finland – R&D Funding"
+      ]
+    },
+    {
+      "url": "https://www.businessfinland.fi/",
+      "programs": [
+        "Business Finland – R&D Funding",
+        "Startup Permit FI"
+      ]
+    },
+    {
+      "url": "https://www.slush.org/",
+      "programs": [
+        "Slush Pitch Competition 2026",
+        "Slush – programy startowe"
+      ]
+    },
+    {
+      "url": "https://www.businessfinland.fi/",
+      "programs": [
+        "Startup Permit FI",
+        "Business Finland – Tempo (kolejne rundy)"
+      ]
+    },
+    {
+      "url": "https://www.innovasjonnorge.no/",
+      "programs": [
+        "Innovation Norway – Oppstartslån",
+        "Innovation Norway – Kommersialiseringstilskudd"
+      ]
+    },
+    {
+      "url": "https://www.skattefunn.no/",
+      "programs": [
+        "Skattefunn (NO) – R&D Tax Credit",
+        "SkatteFUNN (kolejne nabory)"
+      ]
+    },
+    {
+      "url": "https://www.antler.co/",
+      "programs": [
+        "Antler Singapore",
+        "Antler Oslo"
       ]
     }
   ]
