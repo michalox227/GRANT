@@ -23,7 +23,7 @@
     --map-graticule: #14203a;
     --map-land: #142136;
     --map-land-stroke: #31456b;
-    --map-land-hover: #1d3151;
+    --map-land-hover: #234066;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
@@ -106,7 +106,7 @@
     cursor: grab; touch-action: none; user-select: none; }
   .map-svg:active { cursor: grabbing; }
   @media (max-width: 1200px) { .map-svg { min-height: 300px; } }
-  .country { fill: var(--map-land); stroke: var(--map-land-stroke); stroke-width: 0.5;
+  .country { fill: var(--map-land); stroke: var(--map-land-stroke); stroke-width: 0.35;
     vector-effect: non-scaling-stroke; transition: fill 150ms; }
   .country:hover { fill: var(--map-land-hover); }
   /* choropleth: intensywność wg liczby programów */
@@ -165,7 +165,7 @@
   .modal .btn-cancel { background: none; border: 1px solid var(--line-strong);
     color: var(--ink-soft); border-radius: 8px; padding: 9px 14px; }
   .modal .note { margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.5; }
-  .graticule { fill: none; stroke: var(--map-graticule); stroke-width: 0.5;
+  .graticule { fill: none; stroke: var(--map-graticule); stroke-width: 0.35;
     vector-effect: non-scaling-stroke; opacity: 0.8; }
   .marker { cursor: pointer; transition: opacity 200ms; }
   .marker:hover, .marker.selected { filter: drop-shadow(0 0 6px var(--glow)); }
@@ -296,10 +296,7 @@
   footer { padding: 20px 22px 32px; max-width: 1600px; margin: 0 auto; color: var(--muted); font-size: 11px; line-height: 1.55; }
   footer strong { color: var(--ink-soft); }
 
-  .view-note { background: rgba(251,191,36,0.08); color: #fcd34d;
-    border: 1px solid rgba(251,191,36,0.25); border-left: 3px solid var(--warn);
-    padding: 8px 12px; margin: 12px auto 0; max-width: 1600px; font-size: 12px;
-    border-radius: 6px; margin-left: 14px; margin-right: 14px; }
+
 
   /* Tabela porównawcza zapisanych programów */
   .compare-wrap { overflow-x: auto; margin-top: 8px; }

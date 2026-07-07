@@ -970,23 +970,8 @@ async function boot() {
       }
     }
   } catch (_) { /* brak API = tryb statyczny */ }
-  const note = document.getElementById("mode-note");
-  if (note) {
-    if (apiMode) {
-      note.innerHTML = '<strong>✅ Pełna aplikacja (Next.js + API).</strong> Dane serwowane z backendu — ' +
-        'panel <a href="/admin">admin</a> pozwala dodawać i edytować programy (po podpięciu bazy Postgres). ' +
-        'Pinezki 📌 zapisywane w Twojej przeglądarce.';
-      note.style.background = "rgba(52,211,153,0.08)";
-      note.style.borderColor = "rgba(52,211,153,0.3)";
-      note.style.borderLeftColor = "#34d399";
-      note.style.color = "#6ee7b7";
-    } else {
-      note.innerHTML = '<strong>Wersja statyczna (GitHub Pages).</strong> Wszystkie funkcje działają; ' +
-        'dane wbudowane w stronę. Pełna wersja z backendem i panelem admin — po zdeployowaniu repo ' +
-        '<em>michalox227/GRANT</em> na Vercel. Pinezki 📌 zapisywane w Twojej przeglądarce.';
-    }
-  }
   prepareData();
+
   populateSelects();
   buildMap();
   buildCalendar();
