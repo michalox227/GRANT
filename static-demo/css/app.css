@@ -185,8 +185,20 @@
     border: 1px solid var(--line-strong); border-radius: 7px; font-size: 15px; line-height: 1;
     padding: 0; color: var(--ink); transition: border-color 120ms, color 120ms; }
   .map-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .map-hint { position: absolute; top: 10px; left: 10px; font-size: 10px; color: var(--muted);
-    background: rgba(8,14,26,0.7); padding: 3px 8px; border-radius: 5px; pointer-events: none; }
+  /* górny pasek mapy: statystyki na żywo + hint */
+  .map-topbar { position: absolute; top: 10px; left: 10px; right: 52px; z-index: 20;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap; pointer-events: none; }
+  .map-stat { display: inline-flex; align-items: baseline; gap: 6px;
+    background: rgba(8,14,26,0.82); backdrop-filter: blur(6px);
+    border: 1px solid var(--line-strong); border-radius: 8px; padding: 5px 11px; }
+  .map-stat .v { font-size: 15px; font-weight: 800; color: var(--accent);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .map-stat .k { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); font-weight: 600; }
+  .map-stat.deadline .v { color: #fb7185; font-size: 12.5px; font-weight: 700; }
+  .map-hint { margin-left: auto; font-size: 10px; color: var(--muted);
+    background: rgba(8,14,26,0.7); padding: 4px 9px; border-radius: 6px; }
+  @media (max-width: 900px) { .map-hint { display: none; } }
 
   .results-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
   .count { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12px; }

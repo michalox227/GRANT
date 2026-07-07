@@ -238,15 +238,18 @@ function buildCalendar() {
 // ============================================================================
 // MAP RENDERING (SVG + Natural Earth 110m paths)
 // ============================================================================
-// Kadrujemy do zamieszkanych szerokości (84°N…58°S) — bez pustych biegunów i Antarktydy
+// Kadrujemy do zamieszkanych szerokości (84°N…58°S) — bez pustych biegunów i Antarktydy.
+// PAD_Y dodaje pionowy oddech: mapa jest ~10% wyższa niż sama geografia.
 const MAP_W = 1000, LAT_MAX = 84, LAT_MIN = -58;
-const MAP_H = Math.round((LAT_MAX - LAT_MIN) / 360 * MAP_W); // = 395 (spójne z viewBox)
+const GEO_H = Math.round((LAT_MAX - LAT_MIN) / 360 * MAP_W); // 395
+const PAD_Y = Math.round(GEO_H * 0.05); // 5% góra + 5% dół = +10% wysokości
+const MAP_H = GEO_H + 2 * PAD_Y;
 let mapZoom = 1, mapPanX = 0, mapPanY = 0;
 
 function proj(lat, lng) {
   return {
     x: (lng + 180) / 360 * MAP_W,
-    y: (LAT_MAX - lat) / (LAT_MAX - LAT_MIN) * MAP_H,
+    y: PAD_Y + (LAT_MAX - lat) / (LAT_MAX - LAT_MIN) * GEO_H,
   };
 }
 
@@ -397,6 +400,27 @@ function buildMap() {
   rootG.appendChild(markersG);
 
   applyMapTransform(true);
+}
+
+// ── Statystyki na górnym pasku mapy ──
+function updateMapStats(list) {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set("stat-programs", list.length);
+  set("stat-countries", new Set(list.map(p => p.cc)).size);
+  const openNow = list.filter(p => {
+    const dOpen = daysFromToday(p.applyOpen);
+    const dEnd = daysFromToday(p.applyDeadline);
+    if (p.status === "ROLLING" && !p.applyDeadline) return true;
+    if (dEnd !== null && dEnd < 0) return false;
+    if (dOpen !== null && dOpen > 0) return false;
+    return true;
+  });
+  set("stat-open", openNow.length);
+  const upcoming = list
+    .map(p => ({ p, d: daysFromToday(p.applyDeadline) }))
+    .filter(x => x.d !== null && x.d >= 0)
+    .sort((a, b) => a.d - b.d)[0];
+  set("stat-next", upcoming ? (upcoming.d === 0 ? "DZIŚ" : "za " + upcoming.d + " dni") : "—");
 }
 
 // ── Tooltip mapy (własny, zamiast <title>) ──
@@ -696,6 +720,7 @@ function render() {
 
   applyMapTransform(true); // odśwież rozmiary markerów po zmianie klas selected/saved
   highlightCountries(list);
+  updateMapStats(list);
   renderDetail();
   renderSavedView();
   renderCompareTable();
