@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-07-10",
-  "total": 537,
+  "total": 637,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -667,6 +667,97 @@
       "programs": [
         "iNNpulsa – Aldea (aceleración)",
         "iNNpulsa – Crea tu Empresa Deep Tech"
+      ]
+    },
+    {
+      "url": "https://startup.google.com/",
+      "programs": [
+        "Google for Startups Brasil",
+        "Google for Startups Vietnam"
+      ]
+    },
+    {
+      "url": "https://www.antler.co/",
+      "programs": [
+        "Antler Oslo",
+        "Antler Vietnam"
+      ]
+    },
+    {
+      "url": "https://www.kemenparekraf.go.id/",
+      "programs": [
+        "Kemenparekraf – Bekraf for Pra Startup",
+        "BEKUP (Bantuan Ekonomi Kreatif Untuk Pemula)"
+      ]
+    },
+    {
+      "url": "https://startupstudio.id/",
+      "programs": [
+        "BEKUP – Indonesia Startup Development",
+        "Startup Studio Indonesia"
+      ]
+    },
+    {
+      "url": "https://www.antler.co/",
+      "programs": [
+        "Antler Vietnam",
+        "Antler Indonesia (Jakarta)"
+      ]
+    },
+    {
+      "url": "https://www.nia.or.th/",
+      "programs": [
+        "NIA Startup Grant Thailand (2027 round)",
+        "NIA – Space Economy Grant"
+      ]
+    },
+    {
+      "url": "https://www.nia.or.th/",
+      "programs": [
+        "NIA – Space Economy Grant",
+        "NIA – Founder Grant (Ideation)"
+      ]
+    },
+    {
+      "url": "https://mdec.my/",
+      "programs": [
+        "MDEC Digital Investment Accelerator (MY)",
+        "MDEC – Malaysia Digital Status"
+      ]
+    },
+    {
+      "url": "https://startuptaiwan.tw/",
+      "programs": [
+        "SIIH Grant (Startup Island Taiwan)",
+        "NDC – Startup Island Taiwan (kolejne rundy SIIH)"
+      ]
+    },
+    {
+      "url": "https://www.callaghaninnovation.govt.nz/",
+      "programs": [
+        "NZ Callaghan – R&D Getting Started Grant",
+        "Callaghan Innovation – R&D Project Grants"
+      ]
+    },
+    {
+      "url": "https://wayra.com/",
+      "programs": [
+        "Innovup / Wayra México (Telefónica)",
+        "Wayra Perú (Telefónica)"
+      ]
+    },
+    {
+      "url": "https://ipark.jo/",
+      "programs": [
+        "iPARK Jordan – Innovation Startups",
+        "iPARK – Jordan Innovation Grants (kolejne rundy)"
+      ]
+    },
+    {
+      "url": "https://www.tamkeen.bh/",
+      "programs": [
+        "Startup Bahrain – Grant Scheme",
+        "Tamkeen – Business Growth Programme"
       ]
     }
   ]
