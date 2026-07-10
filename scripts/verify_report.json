@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-07-07",
-  "total": 397,
+  "checked_at": "2026-07-10",
+  "total": 537,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -499,6 +499,174 @@
       "programs": [
         "Antler Singapore",
         "Antler Oslo"
+      ]
+    },
+    {
+      "url": "https://www.tubitak.gov.tr/",
+      "programs": [
+        "TÜBİTAK 1507 – KOBİ AR-GE",
+        "TÜBİTAK 1501 – Sanayi Ar-Ge"
+      ]
+    },
+    {
+      "url": "https://www.kosgeb.gov.tr/",
+      "programs": [
+        "KOSGEB TEKMER – Startup Grant (TR)",
+        "KOSGEB – Ar-Ge İnovasyon"
+      ]
+    },
+    {
+      "url": "https://www.tubitak.gov.tr/",
+      "programs": [
+        "TÜBİTAK 1501 – Sanayi Ar-Ge",
+        "BiGG Diaspora (dla Turków za granicą)"
+      ]
+    },
+    {
+      "url": "https://www.kosgeb.gov.tr/",
+      "programs": [
+        "KOSGEB – Ar-Ge İnovasyon",
+        "KOSGEB – Girişimcilik Destek"
+      ]
+    },
+    {
+      "url": "https://hub71.com/",
+      "programs": [
+        "Hub71 – Access Programme (Abu Dhabi)",
+        "Hub71 Incubate"
+      ]
+    },
+    {
+      "url": "https://www.monshaat.gov.sa/",
+      "programs": [
+        "Monsha'at – Kafalah (gwarancje)",
+        "Monsha'at Fintech Incubator"
+      ]
+    },
+    {
+      "url": "https://www.monshaat.gov.sa/",
+      "programs": [
+        "Monsha'at Fintech Incubator",
+        "Monsha'at – Tomoh (scale-up)"
+      ]
+    },
+    {
+      "url": "https://www.qdb.qa/",
+      "programs": [
+        "QDB – Al Dhameen (gwarancje)",
+        "QDB – iStartup Grant"
+      ]
+    },
+    {
+      "url": "https://www.qdb.qa/",
+      "programs": [
+        "QDB – iStartup Grant",
+        "QDB – Ras'melah (equity crowdfunding wsparcie)"
+      ]
+    },
+    {
+      "url": "https://www.tia.org.za/",
+      "programs": [
+        "Technology Innovation Agency (TIA) South Africa",
+        "Technology Innovation Agency – Seed Fund"
+      ]
+    },
+    {
+      "url": "https://www.thedtic.gov.za/",
+      "programs": [
+        "dtic – Black Industrialists Scheme",
+        "Startup Act RPA (w konsultacjach) – status startup"
+      ]
+    },
+    {
+      "url": "https://www.boi.ng/",
+      "programs": [
+        "BOI Nigeria – NEDEP",
+        "Bank of Industry – NEDEP MSME"
+      ]
+    },
+    {
+      "url": "https://www.kenyacic.org/",
+      "programs": [
+        "Kenya Climate Innovation Center (KCIC)",
+        "Kenya Climate Innovation Center – Green Bizz"
+      ]
+    },
+    {
+      "url": "https://www.finep.gov.br/",
+      "programs": [
+        "FINEP Startup Brasil",
+        "FINEP – Startup Brasil (kolejne rundy)"
+      ]
+    },
+    {
+      "url": "https://startup.google.com/",
+      "programs": [
+        "Google for Startups Campus TLV",
+        "Google for Startups Brasil"
+      ]
+    },
+    {
+      "url": "https://www.corfo.cl/",
+      "programs": [
+        "Corfo – Subsidio Semilla de Asignación Flexible (SSAF)",
+        "Corfo – Crea y Valida"
+      ]
+    },
+    {
+      "url": "https://startupchile.org/",
+      "programs": [
+        "Start-Up Chile – Build / Seed",
+        "Startup Chile Ignite"
+      ]
+    },
+    {
+      "url": "https://www.corfo.cl/",
+      "programs": [
+        "Corfo – Crea y Valida",
+        "CORFO – Capital Semilla Expansión"
+      ]
+    },
+    {
+      "url": "https://www.corfo.cl/",
+      "programs": [
+        "CORFO – Capital Semilla Expansión",
+        "Corfo – Distrito de Innovación"
+      ]
+    },
+    {
+      "url": "https://startupchile.org/",
+      "programs": [
+        "Startup Chile Ignite",
+        "Start-Up Chile Growth"
+      ]
+    },
+    {
+      "url": "https://www.corfo.cl/",
+      "programs": [
+        "Corfo – Distrito de Innovación",
+        "Ley de Presupuesto – Beneficios I+D (ulga podatkowa)"
+      ]
+    },
+    {
+      "url": "https://www.nafin.com/",
+      "programs": [
+        "Nacional Financiera (Nafin) – Crédito PyME",
+        "NAFIN – Mujeres PyME"
+      ]
+    },
+    {
+      "url": "https://www.innpulsacolombia.com/",
+      "programs": [
+        "iNNpulsa Colombia – MegaI",
+        "iNNpulsa – Aldea (aceleración)"
+      ]
+    },
+    {
+      "url": "https://www.innpulsacolombia.com/",
+      "programs": [
+        "iNNpulsa – Aldea (aceleración)",
+        "iNNpulsa – Crea tu Empresa Deep Tech"
       ]
     }
   ]
