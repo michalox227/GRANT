@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-07-10",
-  "total": 637,
+  "checked_at": "2026-07-13",
+  "total": 737,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -758,6 +758,41 @@
       "programs": [
         "Startup Bahrain – Grant Scheme",
         "Tamkeen – Business Growth Programme"
+      ]
+    },
+    {
+      "url": "https://nkfih.gov.hu/",
+      "programs": [
+        "NKFIH – Piacvezérelt K+F+I",
+        "NKFIH – Fiatal Kutató"
+      ]
+    },
+    {
+      "url": "https://fi.co/",
+      "programs": [
+        "Founder Institute – Chapter Programs Global",
+        "Riga TechGirls / Founder Institute Riga"
+      ]
+    },
+    {
+      "url": "https://www.eitdigital.eu/",
+      "programs": [
+        "EIT Digital Venture Program 2027",
+        "EIT Digital Estonia Node"
+      ]
+    },
+    {
+      "url": "https://www.rannis.is/",
+      "programs": [
+        "Rannís – Technology Development Fund",
+        "Nýsköpunarsjóður námsmanna (Student Innovation Fund)"
+      ]
+    },
+    {
+      "url": "http://www.most.gov.cn/",
+      "programs": [
+        "Torch Program (MOST China)",
+        "China-Europe Innovation Cooperation Fund"
       ]
     }
   ]
