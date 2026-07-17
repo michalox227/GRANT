@@ -300,7 +300,7 @@ const P = [
 
   { name:"CDTI NEOTEC (Hiszpania)", organizer:"CDTI Innovación",
     country:"Hiszpania", cc:"ES", region:"EU", lat:40.4168, lng:-3.7038,
-    applyOpen:"2026-05-01", applyDeadline:"2026-07-15", status:"INDICATIVE",
+    applyOpen:"2026-05-01", applyDeadline:"2027-07-15", status:"INDICATIVE",
     amount:"do 325 000 EUR (70% kosztów, do 500k EUR budżetu)", amountEurMax:325000, currency:"EUR",
     category:"Grant B+R", fundingType:"grant bezzwrotny",
     forWhom:"hiszpańskie startupy tech <3 lata (młode innowacyjne firmy)",
@@ -3276,6 +3276,112 @@ ADD10("CN", "Chiny", "WORLD", "CN", [
     who:"laboratoria R&D w Hongkongu (możliwe zagraniczne)", req:"partnerstwo z uczelnią HK", desc:"Program budowy laboratoriów badawczych w HK.", url:"https://www.innohk.gov.hk/", tags:["R&D","Hongkong"], pa:"RELOCATE", stg:"OPERATING" },
 ]);
 
+// ── Duża transza programów UE-szczebla (region EU) — dostępne dla polskich
+//    podmiotów bez relokacji. Master-lista otwartych naborów: EU Funding & Tenders Portal. ──
+function ADDEU(entries) {
+  entries.forEach(e => ADD({
+    country: "Unia Europejska", cc: "EU", region: "EU", ...co("EU"),
+    applyOpen: e.open || null, applyDeadline: e.dl || null,
+    status: e.st || (e.dl ? "INDICATIVE" : "ROLLING"),
+    amount: e.amt, amountEurMax: e.eur, currency: e.cur || "EUR",
+    category: e.cat, fundingType: e.ft || "grant bezzwrotny",
+    forWhom: e.who, requirements: e.req, description: e.desc,
+    details: e.det || "Weryfikuj termin i regulamin na EU Funding & Tenders Portal (ec.europa.eu/info/funding-tenders).",
+    url: e.url, tags: e.tags, name: e.name, shortName: e.sn, organizer: e.org,
+    polishAccess: "OK", stage: e.stg || "OPERATING",
+  }));
+}
+
+ADDEU([
+  // ── Horizon Europe – pozostałe klastry (miałem 4/5/6) ──
+  { name:"Horizon Europe – Cluster 1 (Health)", org:"European Commission (HaDEA)", cat:"Grant sektorowy", amt:"1-25 mln EUR/projekt", eur:25000000, dl:"2026-09-16",
+    who:"konsorcja zdrowie/medtech/biotech (min. 3 kraje)", req:"konsorcjum międzynarodowe, topic z WP Cluster 1", desc:"Zdrowie, choroby cywilizacyjne, systemy opieki, medtech.", url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-search", tags:["healthtech","biotech","medtech"] },
+  { name:"Horizon Europe – Cluster 2 (Culture & Inclusive Society)", org:"European Commission (REA)", cat:"Grant sektorowy", amt:"1-10 mln EUR", eur:10000000, dl:"2026-09-16",
+    who:"konsorcja edtech/govtech/kultura/demokracja", req:"konsorcjum międzynarodowe", desc:"Kultura, kreatywność, edukacja cyfrowa, demokracja.", url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/", tags:["edtech","kreatywne"] },
+  { name:"Horizon Europe – Cluster 3 (Civil Security)", org:"European Commission (REA)", cat:"Grant sektorowy", amt:"1-15 mln EUR", eur:15000000, dl:"2026-11-12",
+    who:"konsorcja cyber/security/border/disaster-tech", req:"konsorcjum międzynarodowe", desc:"Cyberbezpieczeństwo, zarządzanie kryzysowe, ochrona infrastruktury.", url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/", tags:["cyber","defense","security"] },
+  { name:"Horizon Europe – Widening (Teaming / Twinning / Hop On)", shortName:"Widening", org:"European Commission", cat:"Grant B+R", amt:"Twinning do 1,5 mln; Teaming do 15 mln EUR", eur:15000000, dl:"2026-10-08",
+    who:"instytucje z krajów Widening — w tym POLSKA", req:"lider/partner z kraju Widening (PL się kwalifikuje)", desc:"Wzmacnianie potencjału badawczego krajów o niższym udziale — Polska jest priorytetowym beneficjentem.", url:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/", tags:["Widening","R&D","PL-priority"], stg:"IDEA" },
+
+  // ── EIC – pozostałe instrumenty ──
+  { name:"EIC Transition", org:"European Innovation Council", cat:"Grant B+R", amt:"do 2,5 mln EUR", eur:2500000, dl:"2026-09-17",
+    who:"zespoły dojrzewające wynik Pathfinder/ERC PoC do TRL 5-6", req:"pochodzenie technologii z projektu UE/ERC, TRL 3→5-6", desc:"Most między badaniami a rynkiem — walidacja i biznesplan.", url:"https://eic.ec.europa.eu/eic-funding-opportunities/eic-transition_en", tags:["deeptech","EIC"], stg:"NEW" },
+  { name:"EIC Pathfinder Open 2027", org:"European Innovation Council", cat:"Grant B+R", amt:"do 3 mln EUR", eur:3000000, dl:"2027-03-10",
+    who:"konsorcja/pojedyncze podmioty, TRL 1-4, dowolna dziedzina", req:"min. 3 podmioty z 3 krajów (Open)", desc:"Wczesne badania wysokiego ryzyka bez ograniczeń tematycznych.", url:"https://eic.ec.europa.eu/", tags:["Pathfinder","TRL 1-4"], stg:"IDEA" },
+  { name:"EIC STEP Scale-Up", org:"European Innovation Council", cat:"Blended finance", amt:"inwestycja equity 10-30 mln EUR", eur:30000000,
+    who:"europejskie scale-upy deeptech w technologiach strategicznych (STEP)", req:"udowodniony wzrost, obszar STEP", desc:"Duże rundy kapitałowe dla europejskich championów deeptech.", url:"https://eic.ec.europa.eu/", tags:["deeptech","scale-up","STEP"], stg:"SCALEUP" },
+
+  // ── European Innovation Ecosystems ──
+  { name:"Women TechEU", org:"European Commission (EISMEA)", cat:"Grant pre-seed / seed", amt:"75 000 EUR + coaching", eur:75000, dl:"2026-10-15",
+    who:"deeptech startupy kierowane przez kobiety (women-led) z UE", req:"kobieta na stanowisku zarządczym, spółka deeptech <5 lat", desc:"Wsparcie founderek deeptech na wczesnym etapie.", url:"https://eismea.ec.europa.eu/programmes/european-innovation-ecosystems_en", tags:["women","deeptech","seed"], stg:"NEW" },
+  { name:"European Innovation Ecosystems (EIE) – Scaleup", org:"EISMEA", cat:"Grant sektorowy", amt:"projekty do 6 mln EUR", eur:6000000, dl:"2026-09-24",
+    who:"konsorcja budujące połączone ekosystemy innowacji", req:"konsorcjum międzynarodowe", desc:"Łączenie regionalnych ekosystemów startupowych.", url:"https://eismea.ec.europa.eu/", tags:["ekosystem"] },
+
+  // ── EIT – pozostałe KIC ──
+  { name:"EIT Culture & Creativity – Accelerator", org:"EIT Culture & Creativity", cat:"Akceleracja + grant", amt:"granty + akceleracja do 100k EUR", eur:100000, dl:"2027-01-31",
+    who:"startupy z sektorów kultury i kreatywnych (CCSI)", req:"produkt CCSI", desc:"Najnowszy KIC — przemysły kultury i kreatywne.", url:"https://www.eit-culture-creativity.eu/", tags:["kreatywne","EIT"], stg:"NEW" },
+  { name:"EIT Jumpstarter", org:"EIT (cross-KIC)", cat:"Akceleracja + grant", amt:"nagroda 10k EUR + pre-akceleracja", eur:10000, dl:"2026-09-15",
+    who:"pre-founderzy z Europy Środkowo-Wschodniej (w tym PL)", req:"pomysł w obszarze KIC", desc:"Pre-akcelerator dla idea-stage z regionu CEE.", url:"https://eitjumpstarter.eu/", tags:["pre-seed","CEE"], stg:"IDEA" },
+
+  // ── Cleantech / climate / energia ──
+  { name:"Innovation Fund (EU ETS)", org:"European Commission (CINEA)", cat:"Grant sektorowy", amt:"od kilku do kilkuset mln EUR (small/large-scale)", eur:100000000, dl:"2026-10-01",
+    who:"projekty przełomowych technologii nisko-emisyjnych", req:"projekt dekarbonizacyjny, dowolna wielkość", desc:"Największy unijny fundusz cleantech (z przychodów ETS).", url:"https://cinea.ec.europa.eu/programmes/innovation-fund_en", tags:["cleantech","OZE","climate"], stg:"SCALEUP" },
+  { name:"Clean Hydrogen Partnership (JU)", org:"Clean Hydrogen JU", cat:"Grant B+R", amt:"1-30 mln EUR/projekt", eur:30000000, dl:"2027-04-23",
+    who:"konsorcja w łańcuchu wodorowym", req:"konsorcjum, topic z rocznego WP", desc:"Wspólne przedsięwzięcie badawcze ds. wodoru.", url:"https://www.clean-hydrogen.europa.eu/", tags:["H2","cleantech"] },
+  { name:"LIFE – Environment & Circular Economy", org:"CINEA", cat:"Grant sektorowy", amt:"do 60-95% projektu", eur:2000000, dl:"2026-09-23",
+    who:"MŚP/konsorcja w gospodarce obiegu zamkniętego", req:"projekt środowiskowy", desc:"Efektywność zasobów, odpady, woda, powietrze.", url:"https://cinea.ec.europa.eu/programmes/life_en", tags:["climate","recycling","water"] },
+  { name:"LIFE – Nature & Biodiversity", org:"CINEA", cat:"Grant sektorowy", amt:"do 60-75% projektu", eur:5000000, dl:"2026-09-23",
+    who:"organizacje/firmy z rozwiązaniami dla bioróżnorodności", req:"projekt przyrodniczy", desc:"Ochrona przyrody i odbudowa ekosystemów.", url:"https://cinea.ec.europa.eu/programmes/life_en", tags:["biodiversity","climate"] },
+
+  // ── Digital / AI / semiconductors ──
+  { name:"Chips JU (European Chips Act) – R&D", org:"Chips Joint Undertaking", cat:"Grant B+R", amt:"projekty wielomilionowe (semiconductors)", eur:50000000, dl:"2026-09-17",
+    who:"konsorcja w łańcuchu półprzewodników", req:"konsorcjum, topic Chips JU", desc:"Badania i pilotaże w europejskim przemyśle chipów.", url:"https://www.chips-ju.europa.eu/", tags:["semiconductors","deeptech"] },
+  { name:"GenAI4EU / AI-on-demand (Digital Europe + Horizon)", org:"European Commission", cat:"Grant sektorowy", amt:"granty AI do kilkudziesięciu mln EUR", eur:20000000, dl:"2026-10-01",
+    who:"firmy i konsorcja wdrażające generatywną AI w kluczowych sektorach", req:"projekt AI wg topicu", desc:"Wsparcie europejskiej generatywnej AI i dostępu do mocy obliczeniowej.", url:"https://digital-strategy.ec.europa.eu/en/policies/genai4eu", tags:["AI","digital"] },
+  { name:"European Digital Innovation Hubs (EDIH)", org:"European Commission / krajowe EDIH", cat:"Akceleracja + grant", amt:"bezpłatne usługi (test-before-invest, doradztwo)", eur:50000, dl:null, st:"ROLLING",
+    who:"MŚP i sektor publiczny wdrażający cyfryzację/AI (w tym w PL)", req:"kontakt z lokalnym EDIH", desc:"Sieć hubów oferujących bezpłatne usługi cyfryzacji — kilkanaście w Polsce.", url:"https://european-digital-innovation-hubs.ec.europa.eu/", tags:["digital","AI","MŚP"], stg:"NEW" },
+
+  // ── IP / SME / rynek wewnętrzny ──
+  { name:"EUIPO SME Fund – IP Vouchers 2026", org:"EUIPO / European Commission", cat:"Grant komercjalizacyjny", amt:"bony: do 1000 EUR (znaki/wzory), do 3500 EUR (patenty), + inne", eur:3500, dl:"2026-12-05", st:"CONFIRMED",
+    who:"MŚP z UE (w tym z Polski) chroniące własność intelektualną", req:"status MŚP w UE", desc:"Refundacja kosztów ochrony IP — jeden z najłatwiej dostępnych grantów dla polskich MŚP.", url:"https://www.euipo.europa.eu/en/discover-ip/sme-fund", tags:["IP","MŚP","patent"], stg:"OPERATING" },
+  { name:"Single Market Programme (SMP) – COSME/SME support", org:"EISMEA", cat:"Grant sektorowy", amt:"granty wspierające MŚP", eur:2000000, dl:"2026-10-30",
+    who:"MŚP i organizacje wsparcia biznesu", req:"projekt wg topicu SMP", desc:"Konkurencyjność MŚP, klastry, dostęp do rynków.", url:"https://eismea.ec.europa.eu/programmes/single-market-programme_en", tags:["MŚP","internacjonalizacja"] },
+
+  // ── Space ──
+  { name:"CASSINI (EU Space) – Business Accelerator", org:"European Commission (EUSPA)", cat:"Akceleracja + grant", amt:"equity-free akceleracja + granty", eur:100000, dl:"2027-02-28",
+    who:"space startupy z UE (downstream Galileo/Copernicus)", req:"produkt wykorzystujący dane kosmiczne UE", desc:"Flagowy program UE dla startupów kosmicznych.", url:"https://cassini.eu/", tags:["space","akceleracja"], stg:"NEW" },
+  { name:"CASSINI Prizes & Hackathons", org:"EUSPA", cat:"Grant sektorowy", amt:"nagrody do 1 mln EUR", eur:1000000, dl:"2026-11-30",
+    who:"innowatorzy wykorzystujący dane kosmiczne UE", req:"rejestracja do konkursu/hackathonu", desc:"Nagrody i hackathony ekosystemu kosmicznego UE.", url:"https://www.euspa.europa.eu/", tags:["space","hackathon","nagrody"], stg:"IDEA" },
+
+  // ── Kreatywne / edukacja ──
+  { name:"Creative Europe – MEDIA", org:"European Commission (EACEA)", cat:"Grant sektorowy", amt:"granty audiowizualne/gamedev", eur:2000000, dl:"2026-09-30",
+    who:"studia gier, producenci filmowi, startupy audiowizualne z UE", req:"projekt audiowizualny/gamedev", desc:"Wsparcie europejskiego sektora audiowizualnego i gier wideo.", url:"https://culture.ec.europa.eu/creative-europe", tags:["gamedev","kreatywne","media"], stg:"NEW" },
+  { name:"Erasmus+ – Cooperation Partnerships (EdTech)", org:"EACEA / krajowe agencje", cat:"Grant sektorowy", amt:"do 400 000 EUR", eur:400000, dl:"2027-03-05",
+    who:"organizacje edukacyjne i edtech w konsorcjach", req:"konsorcjum edukacyjne", desc:"Partnerstwa na rzecz innowacji w edukacji.", url:"https://erasmus-plus.ec.europa.eu/", tags:["edtech","edukacja"] },
+
+  // ── ERC / MSCA – pozostałe ──
+  { name:"ERC Advanced Grant 2027", org:"European Research Council", cat:"Grant B+R", amt:"do 2,5 mln EUR (5 lat)", eur:2500000, dl:"2027-08-28",
+    who:"uznani liderzy badawczy (10+ lat po doktoracie)", req:"host institution w UE", desc:"Grant dla wybitnych, ugruntowanych naukowców.", url:"https://erc.europa.eu/", tags:["R&D","ERC"] },
+  { name:"ERC Proof of Concept", org:"European Research Council", cat:"Grant komercjalizacyjny", amt:"150 000 EUR", eur:150000, dl:"2027-01-29",
+    who:"grantobiorcy ERC komercjalizujący wyniki", req:"aktywny/zakończony grant ERC", desc:"Most od odkrycia ERC do rynku/spin-offu.", url:"https://erc.europa.eu/", tags:["transfer","spin-off","ERC"], stg:"IDEA" },
+  { name:"MSCA Doctoral Networks 2026", org:"European Commission (REA)", cat:"Stypendium", amt:"finansowanie sieci doktoranckich", eur:4000000, dl:"2026-11-25",
+    who:"konsorcja akademicko-przemysłowe (w tym firmy jako beneficjenci)", req:"konsorcjum międzynarodowe", desc:"Kształcenie doktorantów w powiązaniu z przemysłem.", url:"https://marie-sklodowska-curie-actions.ec.europa.eu/", tags:["stypendium","doktorat","MSCA"], stg:"IDEA" },
+
+  // ── Widening / regionalne / rolnictwo ──
+  { name:"Interreg Europe 2026", org:"Interreg / European Commission", cat:"Grant sektorowy", amt:"do 100% (współpraca międzyregionalna)", eur:2000000, dl:"2027-05-30", st:"INDICATIVE",
+    who:"władze regionalne, agencje, klastry (w tym z Polski)", req:"partnerstwo międzyregionalne", desc:"Współpraca terytorialna i wymiana dobrych praktyk.", url:"https://www.interregeurope.eu/", tags:["regionalne","współpraca"] },
+  { name:"PRIMA (Mediterranean agri/water)", org:"PRIMA Foundation", cat:"Grant B+R", amt:"1-3 mln EUR/projekt", eur:3000000, dl:"2026-09-10",
+    who:"konsorcja agri-food/water regionu śródziemnomorskiego (UE + partnerzy)", req:"konsorcjum wg WP PRIMA", desc:"Rolnictwo i gospodarka wodna basenu Morza Śródziemnego.", url:"https://prima-med.org/", tags:["agritech","water"] },
+  { name:"European Defence Fund – EDF Non-Thematic (MŚP)", org:"European Commission (DG DEFIS)", cat:"Grant sektorowy", amt:"do kilku mln EUR (dla MŚP/non-thematic)", eur:5000000, dl:"2026-11-05",
+    who:"MŚP i startupy dual-use w konsorcjach obronnych", req:"konsorcjum z 3 państw członkowskich", desc:"Otwarta ścieżka EDF dla MŚP i przełomowych technologii.", url:"https://defence-industry-space.ec.europa.eu/", tags:["defense","dual-use","MŚP"] },
+
+  // ── InvestEU / instrumenty finansowe ──
+  { name:"InvestEU – SME Window (przez pośredników)", org:"European Investment Fund / banki-pośrednicy", cat:"Blended finance", amt:"gwarancje/pożyczki/equity przez pośredników krajowych", eur:10000000, dl:null, st:"ROLLING",
+    who:"MŚP i scale-upy z UE (w tym PL — przez BGK/banki)", req:"kontakt z pośrednikiem finansowym InvestEU", desc:"Gwarancje UE zwiększające dostęp MŚP do finansowania — w PL m.in. przez BGK.", url:"https://investeu.europa.eu/", tags:["gwarancje","MŚP"], stg:"SCALEUP" },
+  { name:"New European Bauhaus – calls", org:"European Commission", cat:"Grant sektorowy", amt:"granty projektowe do kilkuset tys. EUR", eur:500000, dl:"2026-10-20", st:"INDICATIVE",
+    who:"interdyscyplinarne zespoły łączące design, zrównoważoność i inkluzję", req:"projekt zgodny z wartościami NEB", desc:"Estetyka + zrównoważoność + włączenie społeczne.", url:"https://new-european-bauhaus.europa.eu/", tags:["design","climate","impact"], stg:"NEW" },
+]);
+
 // Format: [name, url, country/region, groupKey, subgroupKey, description]
 // groupKey: PL / EU / EUR_COUNTRY / ASIA / MENA / NAMER
 // subgroupKey: kraj/podgrupa
@@ -3298,7 +3404,11 @@ const AGGS = [
   ["portal-inwestora.pl","https://portal-inwestora.pl/","Polska","PL","","Katalog dotacji + kalkulator kwalifikowalności."],
 
   // ==== UE OGÓLNE ====
-  ["EU Funding & Tenders Portal","https://ec.europa.eu/info/funding-tenders/opportunities/portal/","UE","EU","","Główny portal konkursów Komisji Europejskiej (Horizon, EIC, DIGITAL, LIFE, Erasmus+ itd.)."],
+  ["EU Funding & Tenders Portal ⭐ (100% naborów UE)","https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals","UE","EU","","MASTER-LISTA: wszystkie otwarte nabory szczebla unijnego w jednym miejscu (Horizon, EIC, DIGITAL, LIFE, Erasmus+, Innovation Fund…). Jeśli szukasz kompletu programów UE — tu jest 100%."],
+  ["EUIPO SME Fund (bony IP)","https://www.euipo.europa.eu/en/discover-ip/sme-fund","UE","EU","","Refundacja ochrony IP dla MŚP — jeden z najłatwiejszych grantów dla polskich firm."],
+  ["CASSINI (EU Space)","https://cassini.eu/","UE","EU","","Wszystkie instrumenty UE dla startupów kosmicznych (akcelerator, nagrody, hackathony, matching fund)."],
+  ["European Digital Innovation Hubs (EDIH)","https://european-digital-innovation-hubs.ec.europa.eu/home","UE","EU","","Katalog EDIH — bezpłatne usługi cyfryzacji/AI, kilkanaście hubów w Polsce."],
+  ["Innovation Fund (CINEA)","https://cinea.ec.europa.eu/programmes/innovation-fund_en","UE","EU","","Największy unijny fundusz cleantech (z przychodów ETS)."],
   ["EIC Community","https://eic.ec.europa.eu/","UE","EU","","Oficjalna strona European Innovation Council (Accelerator, Pathfinder, Transition)."],
   ["EIC Data Hub","https://eic.ec.europa.eu/eic-community/eic-data-hub_en","UE","EU","","Baza wszystkich beneficjentów EIC — Accelerator, Pathfinder, Transition."],
   ["Eureka Network","https://www.eurekanetwork.org/","UE","EU","","Międzyrządowa sieć Eureka (Eurostars, Clusters, GlobalStars)."],

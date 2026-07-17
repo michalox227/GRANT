@@ -150,7 +150,15 @@
     <div class="panel" style="margin-top: 14px;">
       <div class="results-head">
         <h3 style="margin:0">Programy pasujące do filtrów</h3>
-        <div class="count">Wyników: <strong id="result-count">0</strong></div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <select id="sel-sort" title="Sortuj wyniki" style="width:auto; font-size:12px; padding:3px 6px;">
+            <option value="deadline">⏳ wg deadline (najbliższe)</option>
+            <option value="amount">💰 wg kwoty (najwyższe)</option>
+            <option value="name">🔤 alfabetycznie</option>
+            <option value="country">🗺️ wg kraju</option>
+          </select>
+          <div class="count">Wyników: <strong id="result-count">0</strong></div>
+        </div>
       </div>
       <ul class="list" id="list"></ul>
     </div>
@@ -184,6 +192,12 @@
     <p style="margin: 0 0 6px; color: var(--ink-soft); font-size: 13px;">
       Zewnętrzne serwisy zbierające programy grantowe — dobre miejsca do bieżącego monitoringu poza tym narzędziem.
     </p>
+    <div style="background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.3); border-left: 3px solid var(--accent); border-radius: 8px; padding: 10px 13px; margin: 8px 0 4px; font-size: 12.5px; color: var(--ink-soft);">
+      <strong style="color: var(--accent);">Chcesz 100% programów UE?</strong> Żaden statyczny atlas nie zawiera wszystkich tysięcy naborów unijnych i krajowych.
+      Kompletną, aktualizowaną na żywo listę <strong>wszystkich otwartych naborów szczebla UE</strong> znajdziesz na
+      <a href="https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals" target="_blank" rel="noopener">EU&nbsp;Funding&nbsp;&&nbsp;Tenders&nbsp;Portal ↗</a>.
+      Ten atlas kuratoruje najważniejsze i najbardziej dostępne programy — resztę znajdziesz przez portale-matki poniżej.
+    </div>
     <div id="aggs-groups"></div>
   </div>
 </div>
