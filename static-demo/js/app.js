@@ -64,9 +64,30 @@ document.getElementById("aggs-count").textContent = AGGS.length;
 
 const state = {
   region: "ALL", country: "ALL", tag: "ALL", category: "ALL", amount: "ALL",
-  stage: "ALL", access: "ALL",
+  stage: "ALL", access: "ALL", sort: "deadline",
   query: "", onlyConfirmed: false, month: null, selectedId: null,
 };
+
+// Sortowanie listy wyników wg wybranego kryterium
+function sortResults(list) {
+  const arr = list.slice();
+  if (state.sort === "amount") {
+    arr.sort((a, b) => (b.amountEurMax || 0) - (a.amountEurMax || 0));
+  } else if (state.sort === "name") {
+    arr.sort((a, b) => (a.shortName || a.name).localeCompare(b.shortName || b.name, "pl"));
+  } else if (state.sort === "country") {
+    arr.sort((a, b) => a.country.localeCompare(b.country, "pl") || (a.shortName || a.name).localeCompare(b.shortName || b.name, "pl"));
+  } else { // deadline — najbliższe najpierw, potem ciągłe/bez daty na końcu
+    const key = p => {
+      const d = daysFromToday(p.applyDeadline);
+      if (d === null) return Infinity - 1;        // ROLLING/bez daty
+      if (d < 0) return Infinity;                  // zakończone na sam koniec
+      return d;
+    };
+    arr.sort((a, b) => key(a) - key(b));
+  }
+  return arr;
+}
 
 // Ikony kategorii/branż (do listy i szczegółów)
 const CATEGORY_ICON = {
@@ -673,7 +694,7 @@ function updateSavedCount() {
 }
 
 function render() {
-  const list = filtered();
+  const list = sortResults(filtered());
   const ids = new Set(list.map(p => p.id));
 
   document.querySelectorAll(".marker").forEach(m => {
@@ -873,6 +894,7 @@ document.getElementById("sel-stage").addEventListener("change", e => { state.sta
 document.getElementById("sel-access").addEventListener("change", e => { state.access = e.target.value; render(); });
 document.getElementById("sel-amount").addEventListener("change", e => { state.amount = e.target.value; render(); });
 document.getElementById("sel-tag").addEventListener("change", e => { state.tag = e.target.value; render(); });
+document.getElementById("sel-sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
 document.getElementById("inp-search").addEventListener("input", e => { state.query = e.target.value; render(); });
 document.getElementById("chk-confirmed").addEventListener("change", e => { state.onlyConfirmed = e.target.checked; render(); });
 document.getElementById("cal-clear").addEventListener("click", () => { state.month = null; render(); });

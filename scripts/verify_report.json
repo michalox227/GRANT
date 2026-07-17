@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-07-13",
-  "total": 737,
+  "checked_at": "2026-07-17",
+  "total": 769,
   "missing_fields": [],
   "expired_deadlines": [],
   "duplicate_urls": [
@@ -793,6 +793,83 @@
       "programs": [
         "Torch Program (MOST China)",
         "China-Europe Innovation Cooperation Fund"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-search",
+      "programs": [
+        "Horizon Europe – Cluster 4 (Digital, Industry, Space)",
+        "Horizon Europe – Cluster 1 (Health)"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+      "programs": [
+        "Horizon Europe – Cluster 6 (Food, Bioeconomy, Environment)",
+        "Horizon Europe – Cluster 2 (Culture & Inclusive Society)"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+      "programs": [
+        "Horizon Europe – Cluster 2 (Culture & Inclusive Society)",
+        "Horizon Europe – Cluster 3 (Civil Security)"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/",
+      "programs": [
+        "Horizon Europe – Cluster 3 (Civil Security)",
+        "Horizon Europe – Widening (Teaming / Twinning / Hop On)"
+      ]
+    },
+    {
+      "url": "https://eic.ec.europa.eu/",
+      "programs": [
+        "EIC Pathfinder Challenge 2026",
+        "EIC Pathfinder Open 2027"
+      ]
+    },
+    {
+      "url": "https://eic.ec.europa.eu/",
+      "programs": [
+        "EIC Pathfinder Open 2027",
+        "EIC STEP Scale-Up"
+      ]
+    },
+    {
+      "url": "https://cinea.ec.europa.eu/programmes/life_en",
+      "programs": [
+        "LIFE Programme – Clean Energy Transition 2026",
+        "LIFE – Environment & Circular Economy"
+      ]
+    },
+    {
+      "url": "https://cinea.ec.europa.eu/programmes/life_en",
+      "programs": [
+        "LIFE – Environment & Circular Economy",
+        "LIFE – Nature & Biodiversity"
+      ]
+    },
+    {
+      "url": "https://erc.europa.eu/",
+      "programs": [
+        "ERC Consolidator Grant 2027",
+        "ERC Advanced Grant 2027"
+      ]
+    },
+    {
+      "url": "https://erc.europa.eu/",
+      "programs": [
+        "ERC Advanced Grant 2027",
+        "ERC Proof of Concept"
+      ]
+    },
+    {
+      "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/",
+      "programs": [
+        "Marie Skłodowska-Curie Actions – Postdoctoral Fellowships 2026",
+        "MSCA Doctoral Networks 2026"
       ]
     }
   ]
