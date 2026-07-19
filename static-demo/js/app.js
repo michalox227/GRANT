@@ -3,7 +3,6 @@
 // TOPOJSON WORLD BOUNDARIES (Natural Earth 110m, ~108KB)
 // ============================================================================
 
-
 // Minimal topojson->geojson decoder (based on topojson-client public algorithm)
 function topojsonFeature(topology, name) {
   const o = topology.objects[name];
@@ -55,7 +54,6 @@ const WORLD = topojsonFeature(TOPO, "countries");
 //   url, tags}
 // ============================================================================
 
-
 // ============================================================================
 // UI STATE + init
 // ============================================================================
@@ -65,7 +63,7 @@ document.getElementById("aggs-count").textContent = AGGS.length;
 const state = {
   region: "ALL", country: "ALL", tag: "ALL", category: "ALL", amount: "ALL",
   stage: "ALL", access: "ALL", sort: "deadline",
-  query: "", onlyConfirmed: false, month: null, selectedId: null,
+  query: "", onlyConfirmed: false, verifiedOnly: false, month: null, selectedId: null,
 };
 
 // Sortowanie listy wyników wg wybranego kryterium
@@ -197,11 +195,48 @@ document.getElementById("login-form").addEventListener("submit", (e) => {
 
 // Assign stable id + backfill pochodne pola (wywoływane w boot(), po ewentualnym
 // nadpisaniu P danymi z API — dzięki temu ta sama strona działa statycznie i jako front API)
+// ── Wiarygodność: program uznajemy za "zweryfikowany", gdy stoi za nim
+//    jednoznacznie realna, rozpoznawalna instytucja/program (whitelist organizatorów).
+//    Reszta = "do weryfikacji" (realna nazwa prawdopodobna, ale szczegóły przybliżone). ──
+const VERIFIED_ORGS = [
+  "PARP","NCBR","BGK","MFiPR","Ministerstwo","NFOŚiGW","Łukasiewicz","PFR","ARP",
+  "European Innovation Council","European Commission","EISMEA","HaDEA","CINEA","REA","EACEA",
+  "Eureka","EIT","EUIPO","European Research Council","EUSPA","European Space Agency","ESA",
+  "European Investment","Interreg","Clean Hydrogen","Chips Joint","CDP","Bpifrance","BMWK","exist",
+  "Innovate UK","UKRI","ARIA","NIHR","British Business Bank","Scottish Enterprise",
+  "CDTI","ENISA","ICEX","ACCIÓ","Invitalia","RVO","NWO","VLAIO","Innoviris","imec","aws","FFG",
+  "Innosuisse","SNSF","Venture Kick","Enterprise Ireland","Vinnova","Almi","Innovation Fund Denmark",
+  "Business Finland","Innovation Norway","Research Council","EAS","KredEx","CzechInvest","TAČR",
+  "IAPMEI","Startup Portugal","aws (Austria","Luxinnovation","Rannís","NKFIH","Hiventures",
+  "National Institutes of Health","NIH","National Science Foundation","NSF","NASA","Department of Defense",
+  "Department of Energy","USDA","DARPA","ARPA-H","NIST","EDA","Y Combinator","Techstars","MassChallenge",
+  "Founder Institute","Antler","Andreessen","Google","Microsoft","Amazon","NVIDIA","Intel","Stripe","HuggingFace",
+  "Israel Innovation Authority","BIRD","Enterprise Singapore","EnterpriseSG","A*STAR","MAS","SGInnovate","IMDA",
+  "NRC","MITACS","BDC","SDTC","Futurpreneur","Global Affairs","Creative Destruction","NGen","IRCC",
+  "Dept. of Industry","Austrade","CSIRO","LaunchVic","Startmate","Callaghan","NZGCP","MBIE",
+  "JETRO","NEDO","METI","JST","IPA Japan","KISED","MSS Korea","KOTRA","Samsung","BIRAC","DST","NITI Aayog",
+  "MeitY","DPIIT","Startup India","Corfo","FINEP","BNDES","CNPq","SEBRAE","FAPESP","Endeavor","NXTP",
+  "Nafin","iNNpulsa","Minciencias","Bancóldex","SENA","TÜBİTAK","KOSGEB","Monsha","KACST","QDB","Qatar",
+  "Hub71","MBRIF","DFDF","ITIDA","MSMEDA","Flat6Labs","TIA","IDC","NEF","Tony Elumelu","CcHUB","LSETF",
+  "Bank of Industry","NITDA","KCIC","Safaricom","AECF","Village Capital","Tamkeen","Bahrain","CBB",
+  "Cradle Fund","MDEC","MAVCAP","MRANTI","NIA Thailand","DEPA","Board of Investment","NDC","ITRI","AppWorks",
+  "DTI","DOST","QBO","IdeaSpace","Vingroup","East Ventures","BRIN","Kominfo","Startup Estonia","Tehnopol",
+  "Superangel","LAUNCHub","Eleven Ventures","LitBAN","INVEGA","Altum","LIAA","MITA","Slovak Investment",
+  "Neulogy","Innovation Norway","IAPMEI","Design Terminal","Start-Up Nation","How to Web","UEFISCDI",
+  "Bahrain FinTech Bay","Oasis500","iPARK","JEDCO","Zain","Startup Lithuania","Versli Lietuva",
+  "Business Iceland","Icelandic Startups","Reykjavik","MOST China","KACST","ROSA","MASScIR","CCG","UM6P","Maroc PME",
+];
+function isVerified(p) {
+  const org = (p.organizer || "");
+  return VERIFIED_ORGS.some(s => org.includes(s));
+}
+
 function prepareData() {
   P.forEach((p, i) => {
     if (!p.id) p.id = "p" + i;
     p.polishAccess = inferAccess(p);
     p.stage = inferStage(p);
+    p.verified = isVerified(p);
   });
 }
 
@@ -673,6 +708,7 @@ function filtered() {
     if (state.stage !== "ALL" && p.stage !== state.stage) return false;
     if (state.access !== "ALL" && p.polishAccess !== state.access) return false;
     if (state.onlyConfirmed && p.status !== "CONFIRMED") return false;
+    if (state.verifiedOnly && !p.verified) return false;
     if (state.query) {
       const q = state.query.toLowerCase();
       const hay = [p.name, p.shortName, p.organizer, p.country, p.description, p.tags.join(" "), p.category]
@@ -745,6 +781,10 @@ function render() {
   const ul = document.getElementById("list");
   ul.innerHTML = "";
   document.getElementById("result-count").textContent = list.length;
+  (() => {
+    const vc = document.getElementById("verified-count");
+    if (vc) { const n = P.filter(p => p.verified).length; vc.textContent = "(" + n + "/" + P.length + ")"; }
+  })();
   if (list.length === 0) {
     const li = document.createElement("li");
     li.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--muted); font-size: 13px;">Brak wyników — rozluźnij filtry.</div>';
@@ -759,7 +799,7 @@ function render() {
         '<span class="pin ' + p.region.toLowerCase() + '">' + p.cc + '</span>' +
         '<span><span class="row-name">' + escapeHTML(p.name) + '</span>' +
         '<span class="row-sub">' + escapeHTML(p.country) + ' · ' + escapeHTML(p.organizer) + '</span>' +
-        '<span class="row-icons">' + STAGE_ICON[p.stage] + ' ' + ACCESS_ICON[p.polishAccess] + ' ' + iconsFor(p) + '</span></span>' +
+        '<span class="row-icons">' + (p.verified ? '<span class="vchip vchip-ok" title="Organizator zweryfikowany">✓</span> ' : '<span class="vchip vchip-warn" title="Do samodzielnej weryfikacji">~</span> ') + STAGE_ICON[p.stage] + ' ' + ACCESS_ICON[p.polishAccess] + ' ' + iconsFor(p) + '</span></span>' +
         '<span class="row-date">' + (p.applyDeadline ? fmtDate(p.applyDeadline) : "ciągły") +
           (() => { const c = countdown(p); return c.html ? '<span class="cd ' + c.cls + '" style="display:block">' + c.html + '</span>' : ""; })() + '</span>' +
         '<button class="row-star ' + (saved ? "on" : "") + '" title="' + (saved ? "Usuń pinezkę" : "Dodaj pinezkę") + '">' + (saved ? "📌" : "📍") + '</button>';
@@ -830,6 +870,9 @@ function renderDetail() {
   }
   const saved = bookmarks.has(p.id);
   const badges =
+    (p.verified
+      ? '<span class="badge vbadge-ok" title="Organizator to rozpoznana, realna instytucja">✓ Zweryfikowany organizator</span>'
+      : '<span class="badge vbadge-warn" title="Sprawdź dane na oficjalnej stronie przed aplikacją">~ Do samodzielnej weryfikacji</span>') +
     '<span class="badge status-' + p.status + '">' + STATUS_LABEL[p.status] + '</span>' +
     '<span class="badge category">' + (CATEGORY_ICON[p.category] || "") + " " + escapeHTML(p.category) + '</span>' +
     '<span class="badge stage stage-' + p.stage + '" title="Etap firmy">' + STAGE_ICON[p.stage] + " " + STAGE_LABEL[p.stage] + '</span>' +
@@ -930,9 +973,10 @@ document.getElementById("sel-tag").addEventListener("change", e => { state.tag =
 document.getElementById("sel-sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
 document.getElementById("inp-search").addEventListener("input", e => { state.query = e.target.value; render(); });
 document.getElementById("chk-confirmed").addEventListener("change", e => { state.onlyConfirmed = e.target.checked; render(); });
+document.getElementById("chk-verified").addEventListener("change", e => { state.verifiedOnly = e.target.checked; render(); });
 document.getElementById("cal-clear").addEventListener("click", () => { state.month = null; render(); });
 document.getElementById("btn-reset").addEventListener("click", () => {
-  Object.assign(state, { region:"ALL", country:"ALL", tag:"ALL", category:"ALL", amount:"ALL", stage:"ALL", access:"ALL", query:"", onlyConfirmed:false, month:null });
+  Object.assign(state, { region:"ALL", country:"ALL", tag:"ALL", category:"ALL", amount:"ALL", stage:"ALL", access:"ALL", query:"", onlyConfirmed:false, verifiedOnly:false, month:null });
   document.querySelectorAll("#chips-region .chip").forEach(x => x.classList.remove("active"));
   document.querySelector('#chips-region .chip[data-r="ALL"]').classList.add("active");
   document.getElementById("sel-country").value = "ALL";
@@ -943,6 +987,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   document.getElementById("sel-tag").value = "ALL";
   document.getElementById("inp-search").value = "";
   document.getElementById("chk-confirmed").checked = false;
+  document.getElementById("chk-verified").checked = false;
   render();
 });
 
