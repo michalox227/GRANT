@@ -103,11 +103,14 @@
     border: 1px solid var(--line-strong); overflow: hidden;
     box-shadow: 0 0 0 1px rgba(45,212,191,0.06) inset, 0 20px 50px rgba(0,0,0,0.5); }
   .map-svg { display: block; width: 100%; height: auto;
-    cursor: grab; touch-action: none; user-select: none; }
+    cursor: grab; touch-action: none; user-select: none;
+    shape-rendering: geometricPrecision; }
   .map-svg:active { cursor: grabbing; }
   @media (max-width: 1200px) { .map-svg { min-height: 300px; } }
+  #land { shape-rendering: geometricPrecision; }
   .country { fill: var(--map-land); stroke: var(--map-land-stroke); stroke-width: 0.35;
-    vector-effect: non-scaling-stroke; transition: fill 150ms; }
+    vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round;
+    paint-order: stroke fill; transition: fill 150ms; }
   .country:hover { fill: var(--map-land-hover); }
   /* choropleth: intensywność wg liczby programów */
   .country.has-programs { cursor: pointer; }
@@ -165,8 +168,9 @@
   .modal .btn-cancel { background: none; border: 1px solid var(--line-strong);
     color: var(--ink-soft); border-radius: 8px; padding: 9px 14px; }
   .modal .note { margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.5; }
-  .graticule { fill: none; stroke: var(--map-graticule); stroke-width: 0.35;
-    vector-effect: non-scaling-stroke; opacity: 0.8; }
+  .graticule { fill: none; stroke: var(--map-graticule); vector-effect: non-scaling-stroke; }
+  .graticule.minor { stroke-width: 0.35; opacity: 0.35; }
+  .graticule.major { stroke-width: 0.5; opacity: 0.6; }
   .marker { cursor: pointer; transition: opacity 200ms; }
   .marker:hover, .marker.selected { filter: drop-shadow(0 0 6px var(--glow)); }
   .marker.selected { stroke: #fff; }

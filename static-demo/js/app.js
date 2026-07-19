@@ -312,11 +312,17 @@ function spreadMarkers(programs) {
 }
 
 function pathFromRings(rings) {
+  // Precyzja 3 miejsc po przecinku (było 1) — usuwa efekt "schodków" przy zoomie.
   let d = "";
   for (const ring of rings) {
+    let px = null, py = null;
     ring.forEach((c, i) => {
       const {x, y} = proj(c[1], c[0]);
-      d += (i === 0 ? "M" : "L") + x.toFixed(1) + "," + y.toFixed(1);
+      const rx = Math.round(x * 1000) / 1000, ry = Math.round(y * 1000) / 1000;
+      // pomijaj punkty nierozróżnialne (redukcja szumu bez utraty kształtu)
+      if (i > 0 && Math.abs(rx - px) < 0.003 && Math.abs(ry - py) < 0.003) return;
+      d += (i === 0 ? "M" : "L") + rx + "," + ry;
+      px = rx; py = ry;
     });
     d += "Z";
   }
@@ -331,24 +337,29 @@ function buildMap() {
   rootG.setAttribute("id", "map-root");
   svg.appendChild(rootG);
 
-  // graticule (siatka co 20°, w granicach kadru)
-  const grat = document.createElementNS(ns, "g");
-  grat.setAttribute("class", "graticule");
-  for (let lng = -160; lng <= 160; lng += 20) {
+  // graticule dwupoziomowa: cienka co 10° + wyraźniejsza co 30° (jak na mapach cyfrowych)
+  const gratMinor = document.createElementNS(ns, "g");
+  gratMinor.setAttribute("class", "graticule minor");
+  const gratMajor = document.createElementNS(ns, "g");
+  gratMajor.setAttribute("class", "graticule major");
+  const addV = (lng, g) => {
     const {x} = proj(0, lng);
     const l = document.createElementNS(ns, "line");
     l.setAttribute("x1", x); l.setAttribute("x2", x);
     l.setAttribute("y1", 0); l.setAttribute("y2", MAP_H);
-    grat.appendChild(l);
-  }
-  for (let lat = -40; lat <= 80; lat += 20) {
+    g.appendChild(l);
+  };
+  const addH = (lat, g) => {
     const {y} = proj(lat, 0);
     const l = document.createElementNS(ns, "line");
     l.setAttribute("y1", y); l.setAttribute("y2", y);
     l.setAttribute("x1", 0); l.setAttribute("x2", MAP_W);
-    grat.appendChild(l);
-  }
-  rootG.appendChild(grat);
+    g.appendChild(l);
+  };
+  for (let lng = -180; lng <= 180; lng += 10) addV(lng, lng % 30 === 0 ? gratMajor : gratMinor);
+  for (let lat = -50; lat <= 80; lat += 10) addH(lat, lat % 30 === 0 ? gratMajor : gratMinor);
+  rootG.appendChild(gratMinor);
+  rootG.appendChild(gratMajor);
 
   // countries (bez Antarktydy — poza kadrem)
   const landG = document.createElementNS(ns, "g");
