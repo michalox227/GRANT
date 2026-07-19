@@ -1,4 +1,4 @@
-/* Platforma celowo w stałej ciemnej, kontrastowej stylistyce — niezależnie od motywu systemu. */
+  /* Platforma celowo w stałej ciemnej, kontrastowej stylistyce — niezależnie od motywu systemu. */
   :root, :root[data-theme="dark"], :root[data-theme="light"] {
     --bg: #05080f;
     --ink: #f1f5f9;
@@ -251,6 +251,11 @@
   .badge.status-INDICATIVE { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.4); color: #fcd34d; }
   .badge.status-ROLLING { background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
   .badge.category { background: var(--accent-soft); color: var(--accent); border-color: rgba(45,212,191,0.3); }
+  .badge.vbadge-ok { background: rgba(52,211,153,0.14); border-color: rgba(52,211,153,0.5); color: #6ee7b7; font-weight: 600; }
+  .badge.vbadge-warn { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.45); color: #fcd34d; font-weight: 600; }
+  .vchip { display: inline-block; font-weight: 700; font-size: 11px; line-height: 1; }
+  .vchip-ok { color: #34d399; }
+  .vchip-warn { color: #fbbf24; }
   .badge.stage { background: rgba(96,165,250,0.12); color: #93c5fd; border-color: rgba(96,165,250,0.35); }
   .badge.stage.stage-IDEA { background: rgba(251,191,36,0.12); color: #fcd34d; border-color: rgba(251,191,36,0.35); }
   .badge.stage.stage-SCALEUP { background: rgba(52,211,153,0.12); color: #6ee7b7; border-color: rgba(52,211,153,0.35); }
@@ -284,6 +289,8 @@
   .cta-save { background: transparent; color: var(--saved); border: 1px solid var(--saved); }
   .cta-save:hover { background: var(--saved); color: white; }
   .cta-save.on { background: var(--saved); color: white; }
+  .cta-link { background: transparent; color: var(--muted); border: 1px solid var(--border); cursor: pointer; }
+  .cta-link:hover { background: rgba(148,163,184,0.12); color: var(--fg); }
   .close { float: right; background: none; border: none; font-size: 22px; line-height: 1;
     color: var(--muted); padding: 0 4px; cursor: pointer; }
   .close:hover { color: var(--ink); }

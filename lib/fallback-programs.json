@@ -11435,23 +11435,23 @@
   "applyOpen": null,
   "applyDeadline": null,
   "status": "ROLLING",
-  "amount": "do 900k TRY",
+  "amount": "do 900 000 TRY (wsparcie inwestycyjne)",
   "amountEurMax": 25000,
   "currency": "TRY",
   "category": "Grant pre-seed / seed",
   "fundingType": "grant bezzwrotny",
-  "forWhom": "tureccy przedsiębiorcy z diaspory (w tym z PL)",
-  "requirements": "pochodzenie tureckie",
-  "description": "Ścieżka BiGG dla diaspory.",
+  "forWhom": "tureccy przedsiębiorcy tech na etapie idea/wczesnym",
+  "requirements": "kandydatura przez operatorów BiGG, projekt tech",
+  "description": "Inwestycyjna ścieżka programu przedsiębiorczości 1512 (BiGG).",
   "details": "Weryfikuj termin i regulamin na stronie organizatora.",
-  "url": "https://www.tubitak.gov.tr/",
+  "url": "https://tubitak.gov.tr/en/funds/sanayi/ulusal-destek-programlari/1512-entrepreneurship-support-program",
   "tags": [
-   "diaspora",
-   "seed"
+   "seed",
+   "deeptech"
   ],
-  "name": "BiGG Diaspora (dla Turków za granicą)",
+  "name": "TÜBİTAK 1512 – BiGG Investment Programme",
   "organizer": "TÜBİTAK",
-  "polishAccess": "OK",
+  "polishAccess": "RELOCATE",
   "stage": "IDEA"
  },
  {

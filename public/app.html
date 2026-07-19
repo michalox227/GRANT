@@ -109,6 +109,12 @@
         </label>
       </div>
       <div class="filter-block">
+        <label class="check">
+          <input type="checkbox" id="chk-verified" />
+          🔍 Tylko zweryfikowane <span id="verified-count" style="color:var(--muted); font-size:11px;"></span>
+        </label>
+      </div>
+      <div class="filter-block">
         <button class="chip" id="btn-reset" style="width: 100%;">Wyczyść wszystkie filtry</button>
       </div>
     </div>
@@ -165,7 +171,10 @@
     <div class="panel" style="margin-top: 14px;">
       <div class="results-head">
         <h3 style="margin:0">📌 Porównanie zapisanych programów</h3>
-        <div class="count"><strong id="compare-count">0</strong> zapisanych</div>
+        <div class="count" style="display:flex; align-items:center; gap:10px;">
+          <span><strong id="compare-count">0</strong> zapisanych</span>
+          <button class="chip" id="btn-export-csv" title="Pobierz zapisane programy jako plik CSV">⬇️ Eksport CSV</button>
+        </div>
       </div>
       <div class="compare-wrap" id="compare-wrap"></div>
     </div>

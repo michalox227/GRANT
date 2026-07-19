@@ -3,7 +3,6 @@
 // TOPOJSON WORLD BOUNDARIES (Natural Earth 110m, ~108KB)
 // ============================================================================
 
-
 // Minimal topojson->geojson decoder (based on topojson-client public algorithm)
 function topojsonFeature(topology, name) {
   const o = topology.objects[name];
@@ -55,7 +54,6 @@ const WORLD = topojsonFeature(TOPO, "countries");
 //   url, tags}
 // ============================================================================
 
-
 // ============================================================================
 // UI STATE + init
 // ============================================================================
@@ -65,7 +63,7 @@ document.getElementById("aggs-count").textContent = AGGS.length;
 const state = {
   region: "ALL", country: "ALL", tag: "ALL", category: "ALL", amount: "ALL",
   stage: "ALL", access: "ALL", sort: "deadline",
-  query: "", onlyConfirmed: false, month: null, selectedId: null,
+  query: "", onlyConfirmed: false, verifiedOnly: false, month: null, selectedId: null,
 };
 
 // Sortowanie listy wyników wg wybranego kryterium
@@ -197,11 +195,48 @@ document.getElementById("login-form").addEventListener("submit", (e) => {
 
 // Assign stable id + backfill pochodne pola (wywoływane w boot(), po ewentualnym
 // nadpisaniu P danymi z API — dzięki temu ta sama strona działa statycznie i jako front API)
+// ── Wiarygodność: program uznajemy za "zweryfikowany", gdy stoi za nim
+//    jednoznacznie realna, rozpoznawalna instytucja/program (whitelist organizatorów).
+//    Reszta = "do weryfikacji" (realna nazwa prawdopodobna, ale szczegóły przybliżone). ──
+const VERIFIED_ORGS = [
+  "PARP","NCBR","BGK","MFiPR","Ministerstwo","NFOŚiGW","Łukasiewicz","PFR","ARP",
+  "European Innovation Council","European Commission","EISMEA","HaDEA","CINEA","REA","EACEA",
+  "Eureka","EIT","EUIPO","European Research Council","EUSPA","European Space Agency","ESA",
+  "European Investment","Interreg","Clean Hydrogen","Chips Joint","CDP","Bpifrance","BMWK","exist",
+  "Innovate UK","UKRI","ARIA","NIHR","British Business Bank","Scottish Enterprise",
+  "CDTI","ENISA","ICEX","ACCIÓ","Invitalia","RVO","NWO","VLAIO","Innoviris","imec","aws","FFG",
+  "Innosuisse","SNSF","Venture Kick","Enterprise Ireland","Vinnova","Almi","Innovation Fund Denmark",
+  "Business Finland","Innovation Norway","Research Council","EAS","KredEx","CzechInvest","TAČR",
+  "IAPMEI","Startup Portugal","aws (Austria","Luxinnovation","Rannís","NKFIH","Hiventures",
+  "National Institutes of Health","NIH","National Science Foundation","NSF","NASA","Department of Defense",
+  "Department of Energy","USDA","DARPA","ARPA-H","NIST","EDA","Y Combinator","Techstars","MassChallenge",
+  "Founder Institute","Antler","Andreessen","Google","Microsoft","Amazon","NVIDIA","Intel","Stripe","HuggingFace",
+  "Israel Innovation Authority","BIRD","Enterprise Singapore","EnterpriseSG","A*STAR","MAS","SGInnovate","IMDA",
+  "NRC","MITACS","BDC","SDTC","Futurpreneur","Global Affairs","Creative Destruction","NGen","IRCC",
+  "Dept. of Industry","Austrade","CSIRO","LaunchVic","Startmate","Callaghan","NZGCP","MBIE",
+  "JETRO","NEDO","METI","JST","IPA Japan","KISED","MSS Korea","KOTRA","Samsung","BIRAC","DST","NITI Aayog",
+  "MeitY","DPIIT","Startup India","Corfo","FINEP","BNDES","CNPq","SEBRAE","FAPESP","Endeavor","NXTP",
+  "Nafin","iNNpulsa","Minciencias","Bancóldex","SENA","TÜBİTAK","KOSGEB","Monsha","KACST","QDB","Qatar",
+  "Hub71","MBRIF","DFDF","ITIDA","MSMEDA","Flat6Labs","TIA","IDC","NEF","Tony Elumelu","CcHUB","LSETF",
+  "Bank of Industry","NITDA","KCIC","Safaricom","AECF","Village Capital","Tamkeen","Bahrain","CBB",
+  "Cradle Fund","MDEC","MAVCAP","MRANTI","NIA Thailand","DEPA","Board of Investment","NDC","ITRI","AppWorks",
+  "DTI","DOST","QBO","IdeaSpace","Vingroup","East Ventures","BRIN","Kominfo","Startup Estonia","Tehnopol",
+  "Superangel","LAUNCHub","Eleven Ventures","LitBAN","INVEGA","Altum","LIAA","MITA","Slovak Investment",
+  "Neulogy","Innovation Norway","IAPMEI","Design Terminal","Start-Up Nation","How to Web","UEFISCDI",
+  "Bahrain FinTech Bay","Oasis500","iPARK","JEDCO","Zain","Startup Lithuania","Versli Lietuva",
+  "Business Iceland","Icelandic Startups","Reykjavik","MOST China","KACST","ROSA","MASScIR","CCG","UM6P","Maroc PME",
+];
+function isVerified(p) {
+  const org = (p.organizer || "");
+  return VERIFIED_ORGS.some(s => org.includes(s));
+}
+
 function prepareData() {
   P.forEach((p, i) => {
     if (!p.id) p.id = "p" + i;
     p.polishAccess = inferAccess(p);
     p.stage = inferStage(p);
+    p.verified = isVerified(p);
   });
 }
 
@@ -673,6 +708,7 @@ function filtered() {
     if (state.stage !== "ALL" && p.stage !== state.stage) return false;
     if (state.access !== "ALL" && p.polishAccess !== state.access) return false;
     if (state.onlyConfirmed && p.status !== "CONFIRMED") return false;
+    if (state.verifiedOnly && !p.verified) return false;
     if (state.query) {
       const q = state.query.toLowerCase();
       const hay = [p.name, p.shortName, p.organizer, p.country, p.description, p.tags.join(" "), p.category]
@@ -745,6 +781,10 @@ function render() {
   const ul = document.getElementById("list");
   ul.innerHTML = "";
   document.getElementById("result-count").textContent = list.length;
+  (() => {
+    const vc = document.getElementById("verified-count");
+    if (vc) { const n = P.filter(p => p.verified).length; vc.textContent = "(" + n + "/" + P.length + ")"; }
+  })();
   if (list.length === 0) {
     const li = document.createElement("li");
     li.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--muted); font-size: 13px;">Brak wyników — rozluźnij filtry.</div>';
@@ -759,7 +799,7 @@ function render() {
         '<span class="pin ' + p.region.toLowerCase() + '">' + p.cc + '</span>' +
         '<span><span class="row-name">' + escapeHTML(p.name) + '</span>' +
         '<span class="row-sub">' + escapeHTML(p.country) + ' · ' + escapeHTML(p.organizer) + '</span>' +
-        '<span class="row-icons">' + STAGE_ICON[p.stage] + ' ' + ACCESS_ICON[p.polishAccess] + ' ' + iconsFor(p) + '</span></span>' +
+        '<span class="row-icons">' + (p.verified ? '<span class="vchip vchip-ok" title="Organizator zweryfikowany">✓</span> ' : '<span class="vchip vchip-warn" title="Do samodzielnej weryfikacji">~</span> ') + STAGE_ICON[p.stage] + ' ' + ACCESS_ICON[p.polishAccess] + ' ' + iconsFor(p) + '</span></span>' +
         '<span class="row-date">' + (p.applyDeadline ? fmtDate(p.applyDeadline) : "ciągły") +
           (() => { const c = countdown(p); return c.html ? '<span class="cd ' + c.cls + '" style="display:block">' + c.html + '</span>' : ""; })() + '</span>' +
         '<button class="row-star ' + (saved ? "on" : "") + '" title="' + (saved ? "Usuń pinezkę" : "Dodaj pinezkę") + '">' + (saved ? "📌" : "📍") + '</button>';
@@ -779,6 +819,7 @@ function render() {
   renderSavedView();
   renderCompareTable();
   updateSavedCount();
+  syncURL();
 }
 
 function renderCompareTable() {
@@ -830,6 +871,9 @@ function renderDetail() {
   }
   const saved = bookmarks.has(p.id);
   const badges =
+    (p.verified
+      ? '<span class="badge vbadge-ok" title="Organizator to rozpoznana, realna instytucja">✓ Zweryfikowany organizator</span>'
+      : '<span class="badge vbadge-warn" title="Sprawdź dane na oficjalnej stronie przed aplikacją">~ Do samodzielnej weryfikacji</span>') +
     '<span class="badge status-' + p.status + '">' + STATUS_LABEL[p.status] + '</span>' +
     '<span class="badge category">' + (CATEGORY_ICON[p.category] || "") + " " + escapeHTML(p.category) + '</span>' +
     '<span class="badge stage stage-' + p.stage + '" title="Etap firmy">' + STAGE_ICON[p.stage] + " " + STAGE_LABEL[p.stage] + '</span>' +
@@ -871,6 +915,7 @@ function renderDetail() {
       '<a class="cta" href="' + p.url + '" target="_blank" rel="noopener">Oficjalna strona ↗</a>' +
       '<button class="cta cta-save ' + (saved ? "on" : "") + '" onclick="toggleBookmark(\'' + p.id + '\')">' +
         (saved ? "📌 Usuń pinezkę" : "📍 Przypnij") + '</button>' +
+      '<button class="cta cta-link" onclick="copyProgramLink(\'' + p.id + '\', this)">🔗 Kopiuj link</button>' +
     '</div>';
 }
 
@@ -930,9 +975,10 @@ document.getElementById("sel-tag").addEventListener("change", e => { state.tag =
 document.getElementById("sel-sort").addEventListener("change", e => { state.sort = e.target.value; render(); });
 document.getElementById("inp-search").addEventListener("input", e => { state.query = e.target.value; render(); });
 document.getElementById("chk-confirmed").addEventListener("change", e => { state.onlyConfirmed = e.target.checked; render(); });
+document.getElementById("chk-verified").addEventListener("change", e => { state.verifiedOnly = e.target.checked; render(); });
 document.getElementById("cal-clear").addEventListener("click", () => { state.month = null; render(); });
 document.getElementById("btn-reset").addEventListener("click", () => {
-  Object.assign(state, { region:"ALL", country:"ALL", tag:"ALL", category:"ALL", amount:"ALL", stage:"ALL", access:"ALL", query:"", onlyConfirmed:false, month:null });
+  Object.assign(state, { region:"ALL", country:"ALL", tag:"ALL", category:"ALL", amount:"ALL", stage:"ALL", access:"ALL", query:"", onlyConfirmed:false, verifiedOnly:false, month:null });
   document.querySelectorAll("#chips-region .chip").forEach(x => x.classList.remove("active"));
   document.querySelector('#chips-region .chip[data-r="ALL"]').classList.add("active");
   document.getElementById("sel-country").value = "ALL";
@@ -943,6 +989,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   document.getElementById("sel-tag").value = "ALL";
   document.getElementById("inp-search").value = "";
   document.getElementById("chk-confirmed").checked = false;
+  document.getElementById("chk-verified").checked = false;
   render();
 });
 
@@ -1009,6 +1056,117 @@ function makeAggCard(a) {
   return card;
 }
 
+// ============================================================================
+// Udostępnialne linki: stan filtrów + wybrany program zapisany w URL (#hash)
+// ============================================================================
+const URL_KEYS = ["region","country","category","stage","access","amount","tag","sort","query","month","selectedId"];
+let _restoringURL = false;
+function syncURL() {
+  if (_restoringURL) return;
+  const params = new URLSearchParams();
+  URL_KEYS.forEach(k => {
+    const v = state[k];
+    if (v && v !== "ALL" && v !== "deadline") params.set(k, v);
+  });
+  if (state.verifiedOnly) params.set("verified", "1");
+  if (state.onlyConfirmed) params.set("confirmed", "1");
+  const qs = params.toString();
+  const newHash = qs ? "#" + qs : "";
+  if (newHash !== location.hash) {
+    history.replaceState(null, "", location.pathname + location.search + (newHash || "#"));
+  }
+}
+function applyStateToUI() {
+  document.querySelectorAll("#chips-region .chip").forEach(x => x.classList.toggle("active", x.dataset.r === state.region));
+  const set = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.value = v; };
+  set("sel-country", state.country); set("sel-category", state.category);
+  set("sel-amount", state.amount); set("sel-stage", state.stage);
+  set("sel-access", state.access); set("sel-tag", state.tag);
+  set("sel-sort", state.sort); set("inp-search", state.query);
+  const cc = document.getElementById("chk-confirmed"); if (cc) cc.checked = !!state.onlyConfirmed;
+  const cv = document.getElementById("chk-verified"); if (cv) cv.checked = !!state.verifiedOnly;
+}
+function applyURL() {
+  const hash = location.hash.replace(/^#/, "");
+  if (!hash) return;
+  const params = new URLSearchParams(hash);
+  _restoringURL = true;
+  URL_KEYS.forEach(k => { if (params.has(k)) state[k] = params.get(k); });
+  state.verifiedOnly = params.get("verified") === "1";
+  state.onlyConfirmed = params.get("confirmed") === "1";
+  // walidacja wybranego programu — jeśli nie istnieje, wyczyść
+  if (state.selectedId && !P.some(p => p.id === state.selectedId)) state.selectedId = null;
+  applyStateToUI();
+  _restoringURL = false;
+}
+window.addEventListener("hashchange", () => { applyURL(); render(); });
+
+// Kopiuj link do konkretnego programu (z aktualnymi filtrami) do schowka
+function copyProgramLink(id, btn) {
+  const prev = state.selectedId;
+  state.selectedId = id;
+  syncURL();
+  const url = location.href;
+  state.selectedId = prev;
+  const done = ok => {
+    if (!btn) return;
+    const t = btn.textContent; btn.textContent = ok ? "✅ Skopiowano" : "⚠️ Skopiuj ręcznie";
+    setTimeout(() => { btn.textContent = t; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => done(true), () => done(false));
+  } else {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta); done(true);
+    } catch (_) { done(false); }
+  }
+}
+window.copyProgramLink = copyProgramLink;
+
+// ============================================================================
+// Eksport zapisanych programów do CSV
+// ============================================================================
+function exportSavedCSV() {
+  const saved = P.filter(p => bookmarks.has(p.id));
+  if (saved.length === 0) { alert("Brak zapisanych programów do eksportu. Przypnij programy ikoną 📍."); return; }
+  const cols = [
+    ["Nazwa", p => p.name],
+    ["Organizator", p => p.organizer],
+    ["Kraj", p => p.country],
+    ["Region", p => REGION_LABEL[p.region] || p.region],
+    ["Deadline", p => p.applyDeadline || "nabór ciągły"],
+    ["Status", p => STATUS_LABEL[p.status] || p.status],
+    ["Kwota", p => p.amount],
+    ["Rodzaj", p => p.category],
+    ["Etap firmy", p => STAGE_LABEL[p.stage] || p.stage],
+    ["Dostępność dla Polaka z PL", p => ACCESS_LABEL[p.polishAccess] || p.polishAccess],
+    ["Zweryfikowany organizator", p => p.verified ? "tak" : "do weryfikacji"],
+    ["Wkład własny", p => p.ownContribution || ""],
+    ["Dla kogo", p => p.forWhom || ""],
+    ["Opis", p => p.description || ""],
+    ["Link", p => p.url],
+  ];
+  const esc = v => {
+    const s = String(v == null ? "" : v).replace(/"/g, '""');
+    return /[",\n;]/.test(s) ? '"' + s + '"' : s;
+  };
+  const rows = [cols.map(c => c[0]).join(";")];
+  saved.forEach(p => rows.push(cols.map(c => esc(c[1](p))).join(";")));
+  const csv = "﻿" + rows.join("\r\n"); // BOM dla Excela + polskie znaki
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "grant-atlas-zapisane-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 100);
+}
+{
+  const be = document.getElementById("btn-export-csv");
+  if (be) be.addEventListener("click", exportSavedCSV);
+}
+
 // init — najpierw próba pobrania danych z API (pełna platforma / panel admin),
 // fallback: dane wbudowane w plik (wersja statyczna, np. GitHub Pages)
 async function boot() {
@@ -1031,6 +1189,7 @@ async function boot() {
   buildMap();
   buildCalendar();
   renderAuth();
+  applyURL();   // przywróć stan z linku (udostępnialne URL-e)
   render();
 }
 boot();
