@@ -171,7 +171,10 @@
     <div class="panel" style="margin-top: 14px;">
       <div class="results-head">
         <h3 style="margin:0">📌 Porównanie zapisanych programów</h3>
-        <div class="count"><strong id="compare-count">0</strong> zapisanych</div>
+        <div class="count" style="display:flex; align-items:center; gap:10px;">
+          <span><strong id="compare-count">0</strong> zapisanych</span>
+          <button class="chip" id="btn-export-csv" title="Pobierz zapisane programy jako plik CSV">⬇️ Eksport CSV</button>
+        </div>
       </div>
       <div class="compare-wrap" id="compare-wrap"></div>
     </div>

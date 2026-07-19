@@ -289,6 +289,8 @@
   .cta-save { background: transparent; color: var(--saved); border: 1px solid var(--saved); }
   .cta-save:hover { background: var(--saved); color: white; }
   .cta-save.on { background: var(--saved); color: white; }
+  .cta-link { background: transparent; color: var(--muted); border: 1px solid var(--border); cursor: pointer; }
+  .cta-link:hover { background: rgba(148,163,184,0.12); color: var(--fg); }
   .close { float: right; background: none; border: none; font-size: 22px; line-height: 1;
     color: var(--muted); padding: 0 4px; cursor: pointer; }
   .close:hover { color: var(--ink); }

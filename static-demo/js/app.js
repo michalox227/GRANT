@@ -819,6 +819,7 @@ function render() {
   renderSavedView();
   renderCompareTable();
   updateSavedCount();
+  syncURL();
 }
 
 function renderCompareTable() {
@@ -914,6 +915,7 @@ function renderDetail() {
       '<a class="cta" href="' + p.url + '" target="_blank" rel="noopener">Oficjalna strona ↗</a>' +
       '<button class="cta cta-save ' + (saved ? "on" : "") + '" onclick="toggleBookmark(\'' + p.id + '\')">' +
         (saved ? "📌 Usuń pinezkę" : "📍 Przypnij") + '</button>' +
+      '<button class="cta cta-link" onclick="copyProgramLink(\'' + p.id + '\', this)">🔗 Kopiuj link</button>' +
     '</div>';
 }
 
@@ -1054,6 +1056,117 @@ function makeAggCard(a) {
   return card;
 }
 
+// ============================================================================
+// Udostępnialne linki: stan filtrów + wybrany program zapisany w URL (#hash)
+// ============================================================================
+const URL_KEYS = ["region","country","category","stage","access","amount","tag","sort","query","month","selectedId"];
+let _restoringURL = false;
+function syncURL() {
+  if (_restoringURL) return;
+  const params = new URLSearchParams();
+  URL_KEYS.forEach(k => {
+    const v = state[k];
+    if (v && v !== "ALL" && v !== "deadline") params.set(k, v);
+  });
+  if (state.verifiedOnly) params.set("verified", "1");
+  if (state.onlyConfirmed) params.set("confirmed", "1");
+  const qs = params.toString();
+  const newHash = qs ? "#" + qs : "";
+  if (newHash !== location.hash) {
+    history.replaceState(null, "", location.pathname + location.search + (newHash || "#"));
+  }
+}
+function applyStateToUI() {
+  document.querySelectorAll("#chips-region .chip").forEach(x => x.classList.toggle("active", x.dataset.r === state.region));
+  const set = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.value = v; };
+  set("sel-country", state.country); set("sel-category", state.category);
+  set("sel-amount", state.amount); set("sel-stage", state.stage);
+  set("sel-access", state.access); set("sel-tag", state.tag);
+  set("sel-sort", state.sort); set("inp-search", state.query);
+  const cc = document.getElementById("chk-confirmed"); if (cc) cc.checked = !!state.onlyConfirmed;
+  const cv = document.getElementById("chk-verified"); if (cv) cv.checked = !!state.verifiedOnly;
+}
+function applyURL() {
+  const hash = location.hash.replace(/^#/, "");
+  if (!hash) return;
+  const params = new URLSearchParams(hash);
+  _restoringURL = true;
+  URL_KEYS.forEach(k => { if (params.has(k)) state[k] = params.get(k); });
+  state.verifiedOnly = params.get("verified") === "1";
+  state.onlyConfirmed = params.get("confirmed") === "1";
+  // walidacja wybranego programu — jeśli nie istnieje, wyczyść
+  if (state.selectedId && !P.some(p => p.id === state.selectedId)) state.selectedId = null;
+  applyStateToUI();
+  _restoringURL = false;
+}
+window.addEventListener("hashchange", () => { applyURL(); render(); });
+
+// Kopiuj link do konkretnego programu (z aktualnymi filtrami) do schowka
+function copyProgramLink(id, btn) {
+  const prev = state.selectedId;
+  state.selectedId = id;
+  syncURL();
+  const url = location.href;
+  state.selectedId = prev;
+  const done = ok => {
+    if (!btn) return;
+    const t = btn.textContent; btn.textContent = ok ? "✅ Skopiowano" : "⚠️ Skopiuj ręcznie";
+    setTimeout(() => { btn.textContent = t; }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => done(true), () => done(false));
+  } else {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta); done(true);
+    } catch (_) { done(false); }
+  }
+}
+window.copyProgramLink = copyProgramLink;
+
+// ============================================================================
+// Eksport zapisanych programów do CSV
+// ============================================================================
+function exportSavedCSV() {
+  const saved = P.filter(p => bookmarks.has(p.id));
+  if (saved.length === 0) { alert("Brak zapisanych programów do eksportu. Przypnij programy ikoną 📍."); return; }
+  const cols = [
+    ["Nazwa", p => p.name],
+    ["Organizator", p => p.organizer],
+    ["Kraj", p => p.country],
+    ["Region", p => REGION_LABEL[p.region] || p.region],
+    ["Deadline", p => p.applyDeadline || "nabór ciągły"],
+    ["Status", p => STATUS_LABEL[p.status] || p.status],
+    ["Kwota", p => p.amount],
+    ["Rodzaj", p => p.category],
+    ["Etap firmy", p => STAGE_LABEL[p.stage] || p.stage],
+    ["Dostępność dla Polaka z PL", p => ACCESS_LABEL[p.polishAccess] || p.polishAccess],
+    ["Zweryfikowany organizator", p => p.verified ? "tak" : "do weryfikacji"],
+    ["Wkład własny", p => p.ownContribution || ""],
+    ["Dla kogo", p => p.forWhom || ""],
+    ["Opis", p => p.description || ""],
+    ["Link", p => p.url],
+  ];
+  const esc = v => {
+    const s = String(v == null ? "" : v).replace(/"/g, '""');
+    return /[",\n;]/.test(s) ? '"' + s + '"' : s;
+  };
+  const rows = [cols.map(c => c[0]).join(";")];
+  saved.forEach(p => rows.push(cols.map(c => esc(c[1](p))).join(";")));
+  const csv = "﻿" + rows.join("\r\n"); // BOM dla Excela + polskie znaki
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "grant-atlas-zapisane-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 100);
+}
+{
+  const be = document.getElementById("btn-export-csv");
+  if (be) be.addEventListener("click", exportSavedCSV);
+}
+
 // init — najpierw próba pobrania danych z API (pełna platforma / panel admin),
 // fallback: dane wbudowane w plik (wersja statyczna, np. GitHub Pages)
 async function boot() {
@@ -1076,6 +1189,7 @@ async function boot() {
   buildMap();
   buildCalendar();
   renderAuth();
+  applyURL();   // przywróć stan z linku (udostępnialne URL-e)
   render();
 }
 boot();
