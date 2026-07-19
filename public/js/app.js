@@ -418,6 +418,7 @@ function buildMap() {
     c.setAttribute("stroke-width", "1.5");
     c.setAttribute("class", "marker");
     c.setAttribute("data-id", p.id);
+    c.setAttribute("data-cc", p.cc);
     c.addEventListener("click", (e) => { e.stopPropagation(); selectProgram(p.id); });
     c.addEventListener("mousemove", (e) => {
       const cd = countdown(p);
@@ -495,20 +496,19 @@ function highlightCountries(matchedPrograms) {
     c.classList.toggle("c4", n >= 11);
     c.classList.toggle("active-country", !!cc && state.country === cc);
   });
-  buildClusters(counts);
+  buildCountryBadges(counts);
 }
 
 // ── Klastry: przy oddaleniu jeden bąbel z liczbą programów na kraj ──
-const CLUSTER_ZOOM_LIMIT = 2; // poniżej tego zoomu pokazuj klastry zamiast markerów
-function clusterCentroid(cc, matched) {
+// ── Kółko z liczbą grantów per kraj — ZAWSZE widoczne (na każdym zoomie) ──
+const REGION_HEX = { PL: "#f43f5e", EU: "#60a5fa", WORLD: "#34d399" };
+function countryCentroid(cc, matched) {
   const items = matched.filter(p => p.cc === cc);
   const lat = items.reduce((s, p) => s + p.lat, 0) / items.length;
   const lng = items.reduce((s, p) => s + p.lng, 0) / items.length;
   return proj(lat, lng);
 }
-let lastCounts = new Map();
-function buildClusters(counts) {
-  lastCounts = counts;
+function buildCountryBadges(counts) {
   const ns = "http://www.w3.org/2000/svg";
   const root = document.getElementById("map-root");
   if (!root) return;
@@ -519,39 +519,61 @@ function buildClusters(counts) {
   const matched = filtered();
   counts.forEach((n, cc) => {
     if (n === 0) return;
-    const { x, y } = clusterCentroid(cc, matched);
+    const { x, y } = countryCentroid(cc, matched);
+    const region = matched.find(p => p.cc === cc)?.region || "WORLD";
+    const country = P.find(p => p.cc === cc)?.country || cc;
+    // promień rośnie z liczbą; liczby 3-cyfrowe dostają większe kółko
+    const digits = String(n).length;
+    const r = Math.min(18, 8 + Math.sqrt(n) * 1.6) + (digits >= 3 ? 2 : 0);
     const cl = document.createElementNS(ns, "g");
-    cl.setAttribute("class", "cluster");
+    cl.setAttribute("class", "cbadge");
     cl.dataset.cc = cc;
-    const r = Math.min(16, 7 + Math.sqrt(n) * 2);
+    cl.dataset.cx = x; cl.dataset.cy = y;
     const circle = document.createElementNS(ns, "circle");
     circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", r);
+    circle.setAttribute("fill", REGION_HEX[region] || "#34d399");
     const label = document.createElementNS(ns, "text");
     label.setAttribute("x", x); label.setAttribute("y", y);
+    label.setAttribute("font-size", digits >= 3 ? 10 : 12);
     label.textContent = n;
     cl.appendChild(circle); cl.appendChild(label);
     cl.addEventListener("click", (e) => {
       e.stopPropagation();
-      zoomAt(x, y, 3 / mapZoom); // wskocz na zoom ~3 w ten punkt
+      if (state.country === cc) { // drugi klik = odznacz
+        state.country = "ALL"; mapZoom = 1; mapPanX = 0; mapPanY = 0; applyMapTransform();
+      } else {
+        state.country = cc; zoomAt(x, y, Math.max(1, 3.5 / mapZoom));
+      }
+      document.getElementById("sel-country").value = state.country;
+      render();
     });
     cl.addEventListener("mousemove", (e) => {
-      const country = P.find(p => p.cc === cc)?.country || cc;
       showTip(e, '<div class="t-title">' + escapeHTML(country) + '</div>' +
         '<div class="t-sub">' + n + ' ' + (n === 1 ? "program" : "programów") + ' pasujących do filtrów</div>' +
-        '<div class="t-cta">kliknij, aby przybliżyć</div>');
+        '<div class="t-cta">kliknij, aby wejść w kraj</div>');
     });
     cl.addEventListener("mouseleave", hideTip);
     g.appendChild(cl);
   });
   root.appendChild(g);
-  updateClusterVisibility();
+  updateMapLayers();
 }
-function updateClusterVisibility() {
-  const clusters = document.getElementById("clusters");
-  const markers = document.getElementById("markers");
-  const clusterMode = mapZoom < CLUSTER_ZOOM_LIMIT;
-  if (clusters) clusters.style.display = clusterMode ? "" : "none";
-  if (markers) markers.style.display = clusterMode ? "none" : "";
+// Kółka ZAWSZE widoczne + kontrola widoczności pinezek i skalowania
+function updateMapLayers() {
+  const drilled = state.country !== "ALL";
+  // pinezki: dla wybranego kraju (drill-down) lub aktualnie zaznaczonego programu
+  document.querySelectorAll(".marker").forEach(m => {
+    const show = (drilled && m.dataset.cc === state.country) || m.dataset.id === state.selectedId;
+    m.style.display = show ? "" : "none";
+  });
+  // kółka: zawsze widoczne; ukryj tylko kółko kraju, w który weszliśmy (żeby pinezki były czytelne)
+  const k = 1 / mapZoom; // kontr-skala: stały rozmiar ekranowy niezależnie od zoomu
+  document.querySelectorAll(".cbadge").forEach(b => {
+    const hide = drilled && b.dataset.cc === state.country;
+    b.style.display = hide ? "none" : "";
+    const cx = +b.dataset.cx, cy = +b.dataset.cy;
+    b.setAttribute("transform", `translate(${cx} ${cy}) scale(${k}) translate(${-cx} ${-cy})`);
+  });
 }
 
 const MAX_ZOOM = 10;
@@ -574,7 +596,7 @@ function applyMapTransform(instant) {
   // markery zachowują stały rozmiar ekranowy niezależnie od zoomu
   const r = 4.5 / Math.sqrt(mapZoom);
   const sw = 1.5 / Math.sqrt(mapZoom);
-  updateClusterVisibility();
+  updateMapLayers();
   document.querySelectorAll(".marker").forEach(m => {
     const sel = m.classList.contains("selected");
     m.setAttribute("r", sel ? r * 1.6 : r);
